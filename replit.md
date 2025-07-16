@@ -23,14 +23,13 @@ Preferred communication style: Simple, everyday language.
 - **Language**: TypeScript with ES modules
 - **API Design**: RESTful API with JSON responses
 - **Development**: Hot module replacement via Vite middleware
-- **Storage**: PostgreSQL database with Drizzle ORM for persistent data storage
+- **Storage**: In-memory storage with interface for future database integration
 
 ### Database Design
 - **ORM**: Drizzle ORM configured for PostgreSQL
-- **Schema**: Three main tables - users, predictions, and live_metrics
-- **Migration**: Drizzle Kit for schema migrations  
-- **Connection**: PostgreSQL database with persistent storage
-- **Status**: ✅ Active database connection with all tables created
+- **Schema**: Two main tables - users and predictions
+- **Migration**: Drizzle Kit for schema migrations
+- **Connection**: Neon Database serverless PostgreSQL
 
 ## Key Components
 

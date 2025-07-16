@@ -120,19 +120,19 @@ export default function LiveDashboard() {
   }
 
   return (
-    <section id="live-dashboard" className="py-20 bg-gradient-to-br from-blue-50 via-white to-green-50/30">
+    <section id="live-dashboard" className="py-12 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-12 slide-up">
+        <div className="flex items-center justify-between mb-8">
           <div>
-            <h2 className="text-5xl font-bold text-gradient mb-4">Real-Time AI Dashboard</h2>
-            <p className="text-xl text-gray-600 leading-relaxed">Live monitoring of blood disease classification system</p>
+            <h2 className="text-3xl font-bold text-gray-900 mb-2">Real-Time AI Dashboard</h2>
+            <p className="text-gray-600">Live monitoring of blood disease classification system</p>
           </div>
-          <div className="flex items-center space-x-3 bg-white/80 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg">
-            <div className={`w-4 h-4 rounded-full ${isConnected ? 'bg-green-500 pulse-ring' : 'bg-red-500'}`}></div>
-            <span className="text-sm font-medium text-gray-700">
+          <div className="flex items-center space-x-2">
+            <div className={`w-3 h-3 rounded-full ${isConnected ? 'bg-green-500' : 'bg-red-500'}`}></div>
+            <span className="text-sm text-gray-600">
               {isConnected ? 'Connected' : 'Disconnected'}
             </span>
-            <Badge variant="outline" className="ml-2 bg-green-50 text-green-700 border-green-200">
+            <Badge variant="outline" className="ml-2">
               <Activity className="w-3 h-3 mr-1" />
               Live
             </Badge>
@@ -140,74 +140,58 @@ export default function LiveDashboard() {
         </div>
 
         {/* Key Metrics Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12 fade-in">
-          <Card className="card-hover border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardContent className="p-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+          <Card className="shadow-lg border-l-4 border-l-sudan-blue">
+            <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Total Predictions</p>
-                  <p className="text-4xl font-bold text-gray-900 mb-1">{liveMetrics.totalPredictions.toLocaleString()}</p>
-                  <p className="text-sm text-green-600 flex items-center">
-                    <TrendingUp className="w-3 h-3 mr-1" />
-                    Live tracking
-                  </p>
+                  <p className="text-sm text-gray-600 mb-1">Total Predictions</p>
+                  <p className="text-3xl font-bold text-gray-900">{liveMetrics.totalPredictions.toLocaleString()}</p>
                 </div>
-                <div className="w-14 h-14 bg-gradient-sudan rounded-xl flex items-center justify-center shadow-lg">
-                  <Brain className="w-7 h-7 text-white" />
+                <div className="w-12 h-12 bg-sudan-blue rounded-full flex items-center justify-center">
+                  <Brain className="w-6 h-6 text-white" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="card-hover border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardContent className="p-8">
+          <Card className="shadow-lg border-l-4 border-l-medical-green">
+            <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Model Accuracy</p>
-                  <p className="text-4xl font-bold text-gray-900 mb-1">{(liveMetrics.accuracyRate * 100).toFixed(2)}%</p>
-                  <p className="text-sm text-green-600 flex items-center">
-                    <TrendingUp className="w-3 h-3 mr-1" />
-                    Above target
-                  </p>
+                  <p className="text-sm text-gray-600 mb-1">Model Accuracy</p>
+                  <p className="text-3xl font-bold text-gray-900">{(liveMetrics.accuracyRate * 100).toFixed(2)}%</p>
                 </div>
-                <div className="w-14 h-14 bg-medical-green rounded-xl flex items-center justify-center shadow-lg">
-                  <TrendingUp className="w-7 h-7 text-white" />
+                <div className="w-12 h-12 bg-medical-green rounded-full flex items-center justify-center">
+                  <TrendingUp className="w-6 h-6 text-white" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="card-hover border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardContent className="p-8">
+          <Card className="shadow-lg border-l-4 border-l-sudan-yellow">
+            <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Avg Confidence</p>
-                  <p className="text-4xl font-bold text-gray-900 mb-1">{(liveMetrics.avgConfidence * 100).toFixed(1)}%</p>
-                  <p className="text-sm text-blue-600 flex items-center">
-                    <Zap className="w-3 h-3 mr-1" />
-                    High precision
-                  </p>
+                  <p className="text-sm text-gray-600 mb-1">Avg Confidence</p>
+                  <p className="text-3xl font-bold text-gray-900">{(liveMetrics.avgConfidence * 100).toFixed(1)}%</p>
                 </div>
-                <div className="w-14 h-14 bg-gradient-medical rounded-xl flex items-center justify-center shadow-lg">
-                  <Zap className="w-7 h-7 text-white" />
+                <div className="w-12 h-12 bg-sudan-yellow rounded-full flex items-center justify-center">
+                  <Zap className="w-6 h-6 text-white" />
                 </div>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="card-hover border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardContent className="p-8">
+          <Card className="shadow-lg border-l-4 border-l-sudan-red">
+            <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Active Cases</p>
-                  <p className="text-4xl font-bold text-gray-900 mb-1">{Object.values(liveMetrics.diseaseStats).reduce((sum, count) => sum + count, 0)}</p>
-                  <p className="text-sm text-purple-600 flex items-center">
-                    <Users className="w-3 h-3 mr-1" />
-                    Real-time
-                  </p>
+                  <p className="text-sm text-gray-600 mb-1">Active Cases</p>
+                  <p className="text-3xl font-bold text-gray-900">{Object.values(liveMetrics.diseaseStats).reduce((sum, count) => sum + count, 0)}</p>
                 </div>
-                <div className="w-14 h-14 bg-accent-purple rounded-xl flex items-center justify-center shadow-lg">
-                  <Users className="w-7 h-7 text-white" />
+                <div className="w-12 h-12 bg-sudan-red rounded-full flex items-center justify-center">
+                  <Users className="w-6 h-6 text-white" />
                 </div>
               </div>
             </CardContent>
