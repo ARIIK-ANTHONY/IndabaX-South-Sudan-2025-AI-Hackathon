@@ -1,4 +1,6 @@
 import { users, predictions, liveMetrics, type User, type InsertUser, type Prediction, type InsertPrediction, type LiveMetrics, type InsertLiveMetrics } from "@shared/schema";
+import { db } from "./db";
+import { eq, desc } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
@@ -94,4 +96,72 @@ export class MemStorage implements IStorage {
   }
 }
 
-export const storage = new MemStorage();
+export class DatabaseStorage implements IStorage {
+  async getUser(id: number): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
+  }
+
+  async getUserByUsername(username: string): Promise<User | undefined> {
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
+  }
+
+  async createUser(insertUser: InsertUser): Promise<User> {
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
+    return user;
+  }
+
+  async createPrediction(predictionData: InsertPrediction & { prediction: string; confidence: number }): Promise<Prediction> {
+    const [prediction] = await db
+      .insert(predictions)
+      .values(predictionData)
+      .returning();
+    return prediction;
+  }
+
+  async getAllPredictions(): Promise<Prediction[]> {
+    return await db.select().from(predictions).orderBy(desc(predictions.createdAt));
+  }
+
+  async getRecentPredictions(limit: number = 10): Promise<Prediction[]> {
+    return await db
+      .select()
+      .from(predictions)
+      .orderBy(desc(predictions.createdAt))
+      .limit(limit);
+  }
+
+  async getLiveMetrics(): Promise<LiveMetrics | undefined> {
+    const [metrics] = await db
+      .select()
+      .from(liveMetrics)
+      .orderBy(desc(liveMetrics.timestamp))
+      .limit(1);
+    return metrics || undefined;
+  }
+
+  async updateLiveMetrics(metricsData: InsertLiveMetrics): Promise<LiveMetrics> {
+    const [metrics] = await db
+      .insert(liveMetrics)
+      .values(metricsData)
+      .returning();
+    return metrics;
+  }
+
+  async getDiseaseStats(): Promise<{ [key: string]: number }> {
+    const allPredictions = await db.select().from(predictions);
+    const stats: { [key: string]: number } = {};
+    
+    allPredictions.forEach(prediction => {
+      stats[prediction.prediction] = (stats[prediction.prediction] || 0) + 1;
+    });
+    
+    return stats;
+  }
+}
+
+export const storage = new DatabaseStorage();
