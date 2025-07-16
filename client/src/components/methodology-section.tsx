@@ -57,21 +57,21 @@ export default function MethodologySection() {
     <section id="methodology" className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gradient-primary mb-4">Technical Methodology</h2>
-          <p className="text-xl text-gray-600">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Technical Methodology</h2>
+          <p className="text-xl text-gray-800">
             Four-phase approach combining domain expertise with advanced machine learning
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {phases.map((phase) => (
-            <Card key={phase.number} className={`shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 ${phase.borderColor} bg-white hover:bg-gray-50/50`}>
+            <Card key={phase.number} className={`shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 ${phase.borderColor} bg-white hover:bg-gray-50`}>
               <CardContent className="p-8">
                 <div className={`w-20 h-20 ${phase.gradient} rounded-3xl flex items-center justify-center text-white font-bold text-3xl mb-6 shadow-lg`}>
                   {phase.number}
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">{phase.title}</h3>
-                <ul className="space-y-3 text-gray-600">
+                <ul className="space-y-3 text-gray-800">
                   {phase.items.map((item, index) => (
                     <li key={index} className="flex items-start space-x-3">
                       <div className={`w-3 h-3 ${phase.color} rounded-full mt-1.5 flex-shrink-0`}></div>

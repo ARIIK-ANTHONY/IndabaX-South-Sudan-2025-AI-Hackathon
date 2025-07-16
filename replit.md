@@ -9,6 +9,10 @@ This is a full-stack web application for automated blood disease classification 
 - Implemented medical-focused color variables with trust blue, healing green, and calming teal
 - Enhanced accessibility with WCAG-compliant color contrasts
 - Updated hero section, navigation, and demo interface with new healthcare branding
+- Refined methodology section with distinct blue, emerald, purple, and amber color schemes
+- Updated features section with vibrant standard Tailwind colors for better accessibility
+- Enhanced text contrast across all sections using darker gray text (gray-800/900) for better readability
+- Improved card styling with solid white backgrounds and cleaner hover effects
 
 ## User Preferences
 

@@ -57,8 +57,8 @@ export default function FeaturesSection() {
     <section className="py-20 bg-gradient-to-br from-green-50 to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gradient-primary mb-4">Key Features</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Key Features</h2>
+          <p className="text-xl text-gray-800 max-w-3xl mx-auto">
             Comprehensive AI solution combining medical expertise with cutting-edge technology
           </p>
         </div>
@@ -69,7 +69,7 @@ export default function FeaturesSection() {
             return (
               <Card 
                 key={index} 
-                className={`group shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 ${feature.borderColor} bg-white hover:bg-gray-50/50`}
+                className={`group shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 ${feature.borderColor} bg-white hover:bg-gray-50`}
               >
                 <CardContent className="p-8">
                   <div className={`w-20 h-20 bg-gradient-to-br ${feature.color} rounded-3xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
@@ -78,7 +78,7 @@ export default function FeaturesSection() {
                   <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-gray-800 leading-relaxed">
                     {feature.description}
                   </p>
                 </CardContent>
