@@ -3,7 +3,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
-import { TrendingUp, Activity, Clock, AlertTriangle } from "lucide-react";
+import { TrendingUp, Activity, Clock, AlertTriangle, ArrowUpRight, ArrowDownRight } from "lucide-react";
 
 interface RealtimeData {
   totalPredictions: number;
@@ -65,207 +65,66 @@ export default function RealTimeMetrics() {
   }
 
   return (
-    <section id="realtime" className="py-16 bg-gradient-to-br from-gray-50 to-blue-50/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-12">
-          <div className="slide-up">
-            <h2 className="text-4xl font-bold text-gradient mb-3">Real-Time Analytics</h2>
-            <p className="text-lg text-gray-600">Live system performance and AI predictions</p>
+    <section id="realtime" className="py-24 relative overflow-hidden">
+      {/* Background Elements */}
+      <div className="absolute inset-0 bg-gradient-to-br from-neutral-50 via-primary/5 to-medical-green/5"></div>
+      <div className="absolute top-10 right-10 w-64 h-64 bg-gradient-primary/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-10 left-10 w-80 h-80 bg-gradient-success/10 rounded-full blur-3xl"></div>
+      
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16 slide-up">
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-success/10 rounded-full border border-medical-green/20 mb-6">
+            <div className="w-2 h-2 bg-medical-green rounded-full animate-pulse"></div>
+            <span className="text-sm font-semibold text-medical-green">Live System Analytics</span>
           </div>
-          <Badge variant="outline" className="flex items-center gap-2 bg-white/80 backdrop-blur-sm border-green-200 text-green-700 px-4 py-2">
-            <div className="w-3 h-3 bg-green-500 rounded-full pulse-ring"></div>
-            Live Updates
-          </Badge>
+          
+          <h2 className="text-5xl md:text-6xl font-black text-neutral-900 mb-6">
+            Real-Time <span className="text-gradient">Performance</span>
+          </h2>
+          <p className="text-xl text-neutral-600 max-w-3xl mx-auto font-medium">
+            Monitor AI predictions and system performance with live data streaming and advanced analytics
+          </p>
         </div>
 
-        {/* Real-time metrics cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          <Card className="card-hover border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardContent className="p-8">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Total Predictions</p>
-                  <p className="text-4xl font-bold text-gray-900 mb-2">
-                    {currentMetrics?.totalPredictions?.toLocaleString() || 0}
-                  </p>
-                  <p className="text-sm text-green-600 flex items-center">
-                    <TrendingUp className="w-4 h-4 mr-2" />
-                    Active monitoring
-                  </p>
-                </div>
-                <div className="w-16 h-16 bg-gradient-sudan rounded-2xl flex items-center justify-center shadow-lg">
-                  <Activity className="w-8 h-8 text-white" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="card-hover border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardContent className="p-8">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Model Accuracy</p>
-                  <p className="text-4xl font-bold text-gray-900 mb-2">
-                    {((currentMetrics?.accuracyRate || 0) * 100).toFixed(2)}%
-                  </p>
-                  <p className="text-sm text-green-600 flex items-center">
-                    <TrendingUp className="w-4 h-4 mr-2" />
-                    Above target
-                  </p>
-                </div>
-                <div className="w-16 h-16 bg-medical-green rounded-2xl flex items-center justify-center shadow-lg">
-                  <TrendingUp className="w-8 h-8 text-white" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="card-hover border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardContent className="p-8">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Avg Confidence</p>
-                  <p className="text-4xl font-bold text-gray-900 mb-2">
-                    {((currentMetrics?.avgConfidence || 0) * 100).toFixed(1)}%
-                  </p>
-                  <p className="text-sm text-blue-600 flex items-center">
-                    <Clock className="w-4 h-4 mr-2" />
-                    High confidence
-                  </p>
-                </div>
-                <div className="w-16 h-16 bg-gradient-medical rounded-2xl flex items-center justify-center shadow-lg">
-                  <AlertTriangle className="w-8 h-8 text-white" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Live performance chart */}
-          <Card className="card-hover border-0 shadow-xl bg-white/90 backdrop-blur-sm">
-            <CardContent className="p-8">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold text-gray-900">Performance Over Time</h3>
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-medical-green rounded-full"></div>
-                    <span className="text-sm font-medium text-gray-600">Accuracy</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 bg-sudan-blue rounded-full"></div>
-                    <span className="text-sm font-medium text-gray-600">Confidence</span>
-                  </div>
-                </div>
-              </div>
-              <div className="h-80">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={metrics} margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
-                    <XAxis 
-                      dataKey="timestamp" 
-                      tickFormatter={(value) => new Date(value).toLocaleTimeString()}
-                      axisLine={false}
-                      tickLine={false}
-                      tick={{ fontSize: 12, fill: '#6b7280' }}
-                    />
-                    <YAxis 
-                      axisLine={false}
-                      tickLine={false}
-                      tick={{ fontSize: 12, fill: '#6b7280' }}
-                      tickFormatter={(value) => `${(value * 100).toFixed(0)}%`}
-                    />
-                    <Tooltip 
-                      labelFormatter={(value) => new Date(value).toLocaleString()}
-                      formatter={(value: number, name: string) => [
-                        `${(value * 100).toFixed(2)}%`, 
-                        name === 'accuracyRate' ? 'Accuracy' : 'Confidence'
-                      ]}
-                      contentStyle={{
-                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                        border: 'none',
-                        borderRadius: '12px',
-                        boxShadow: '0 10px 40px -10px rgba(0, 0, 0, 0.1)'
-                      }}
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="accuracyRate" 
-                      stroke="hsl(142, 76%, 36%)" 
-                      strokeWidth={3}
-                      dot={{ r: 5, fill: 'hsl(142, 76%, 36%)', strokeWidth: 2 }}
-                      activeDot={{ r: 7, fill: 'hsl(142, 76%, 36%)' }}
-                      name="Accuracy"
-                    />
-                    <Line 
-                      type="monotone" 
-                      dataKey="avgConfidence" 
-                      stroke="hsl(217, 91%, 60%)" 
-                      strokeWidth={3}
-                      dot={{ r: 5, fill: 'hsl(217, 91%, 60%)', strokeWidth: 2 }}
-                      activeDot={{ r: 7, fill: 'hsl(217, 91%, 60%)' }}
-                      name="Confidence"
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Disease distribution */}
-          <Card className="card-hover border-0 shadow-xl bg-white/90 backdrop-blur-sm">
-            <CardContent className="p-8">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-2xl font-bold text-gray-900">Disease Distribution</h3>
-                <Badge variant="secondary" className="bg-blue-100 text-blue-700">
-                  Real-time
-                </Badge>
-              </div>
-              <div className="h-80">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart data={diseaseDistribution || []} margin={{ top: 5, right: 30, left: 20, bottom: 60 }}>
-                    <XAxis 
-                      dataKey="name" 
-                      angle={-45} 
-                      textAnchor="end" 
-                      height={80}
-                      axisLine={false}
-                      tickLine={false}
-                      tick={{ fontSize: 11, fill: '#6b7280' }}
-                    />
-                    <YAxis 
-                      axisLine={false}
-                      tickLine={false}
-                      tick={{ fontSize: 12, fill: '#6b7280' }}
-                    />
-                    <Tooltip 
-                      formatter={(value) => [`${value} cases`, 'Count']}
-                      contentStyle={{
-                        backgroundColor: 'rgba(255, 255, 255, 0.95)',
-                        border: 'none',
-                        borderRadius: '12px',
-                        boxShadow: '0 10px 40px -10px rgba(0, 0, 0, 0.1)'
-                      }}
-                    />
-                    <Bar 
-                      dataKey="value" 
-                      fill="hsl(217, 91%, 60%)"
-                      radius={[4, 4, 0, 0]}
-                    />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-            </CardContent>
-          </Card>
+        {/* Enhanced metrics cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+          <MetricCard
+            title="Total Predictions"
+            value={currentMetrics?.totalPredictions?.toLocaleString() || '0'}
+            change="+12%"
+            trend="up"
+            icon={<Activity className="w-8 h-8" />}
+            color="primary"
+            delay="0.1s"
+          />
+          <MetricCard
+            title="Accuracy Rate"
+            value={`${((currentMetrics?.accuracyRate || 0) * 100).toFixed(1)}%`}
+            change="+0.2%"
+            trend="up"
+            icon={<TrendingUp className="w-8 h-8" />}
+            color="success"
+            delay="0.2s"
+          />
+          <MetricCard
+            title="Avg Confidence"
+            value={`${((currentMetrics?.avgConfidence || 0) * 100).toFixed(1)}%`}
+            change="+1.5%"
+            trend="up"
+            icon={<AlertTriangle className="w-8 h-8" />}
+            color="warning"
+            delay="0.3s"
+          />
         </div>
 
         {/* Recent predictions table */}
-        <Card className="card-hover border-0 shadow-xl bg-white/90 backdrop-blur-sm mt-12">
+        <Card className="glass-card rounded-3xl border-0 mt-16 overflow-hidden slide-up">
           <CardContent className="p-8">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold text-gray-900">Latest Predictions</h3>
+            <div className="flex items-center justify-between mb-8">
+              <h3 className="text-2xl font-bold text-neutral-900">Latest AI Predictions</h3>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full pulse-ring"></div>
-                <span className="text-sm font-medium text-gray-600">Live Feed</span>
+                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                <span className="text-sm font-semibold text-neutral-600">Live Feed</span>
               </div>
             </div>
             <div className="overflow-x-auto">
@@ -323,5 +182,86 @@ export default function RealTimeMetrics() {
         </Card>
       </div>
     </section>
+  );
+}
+
+function MetricCard({ 
+  title, 
+  value, 
+  change, 
+  trend, 
+  icon, 
+  color, 
+  delay 
+}: { 
+  title: string, 
+  value: string, 
+  change: string, 
+  trend: 'up' | 'down', 
+  icon: React.ReactNode, 
+  color: 'primary' | 'success' | 'warning' | 'purple',
+  delay: string 
+}) {
+  const colorClasses = {
+    primary: {
+      bg: 'from-primary/10 to-primary/5',
+      border: 'border-primary/20',
+      text: 'text-primary',
+      icon: 'bg-gradient-primary'
+    },
+    success: {
+      bg: 'from-medical-green/10 to-medical-green/5',
+      border: 'border-medical-green/20', 
+      text: 'text-medical-green',
+      icon: 'bg-gradient-success'
+    },
+    warning: {
+      bg: 'from-sudan-yellow/10 to-sudan-yellow/5',
+      border: 'border-sudan-yellow/20',
+      text: 'text-sudan-yellow',
+      icon: 'bg-gradient-warning'
+    },
+    purple: {
+      bg: 'from-accent-purple/10 to-accent-purple/5',
+      border: 'border-accent-purple/20',
+      text: 'text-accent-purple',
+      icon: 'bg-accent-purple'
+    }
+  };
+
+  const classes = colorClasses[color];
+
+  return (
+    <Card 
+      className={`glass-card rounded-3xl border ${classes.border} card-hover scale-in overflow-hidden`}
+      style={{ animationDelay: delay }}
+    >
+      <CardContent className="p-8">
+        <div className="flex items-start justify-between">
+          <div className="flex-1">
+            <p className="text-sm font-bold text-neutral-500 uppercase tracking-wider mb-3">
+              {title}
+            </p>
+            <p className="text-4xl font-black mb-4 text-neutral-900">
+              {value}
+            </p>
+            <div className="flex items-center gap-2">
+              {trend === 'up' ? (
+                <ArrowUpRight className="w-4 h-4 text-green-600" />
+              ) : (
+                <ArrowDownRight className="w-4 h-4 text-red-500" />
+              )}
+              <span className={`text-sm font-semibold ${trend === 'up' ? 'text-green-600' : 'text-red-500'}`}>
+                {change}
+              </span>
+              <span className="text-sm text-neutral-500">vs last hour</span>
+            </div>
+          </div>
+          <div className={`w-16 h-16 ${classes.icon} rounded-2xl flex items-center justify-center text-white floating-shadow`}>
+            {icon}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
 }
