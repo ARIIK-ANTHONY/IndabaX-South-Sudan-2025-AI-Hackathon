@@ -24,13 +24,16 @@
   --ring: hsl(20, 14.3%, 4.1%);
   --radius: 0.5rem;
   
-  /* South Sudan theme colors */
-  --sudan-blue: hsl(228, 84%, 35%);
-  --sudan-yellow: hsl(44, 93%, 56%);
+  /* South Sudan theme colors - Enhanced */
+  --sudan-blue: hsl(217, 91%, 60%);
+  --sudan-yellow: hsl(45, 100%, 58%);
   --sudan-red: hsl(0, 73%, 49%);
   --sudan-black: hsl(0, 0%, 0%);
-  --medical-blue: hsl(215, 83%, 59%);
-  --medical-green: hsl(162, 94%, 30%);
+  --medical-blue: hsl(210, 100%, 50%);
+  --medical-green: hsl(142, 76%, 36%);
+  --accent-purple: hsl(262, 83%, 58%);
+  --gradient-start: hsl(217, 91%, 60%);
+  --gradient-end: hsl(142, 76%, 36%);
 }
 
 .dark {
@@ -68,19 +71,19 @@
 
 @layer utilities {
   .sudan-blue {
-    color: hsl(228, 84%, 35%);
+    color: hsl(217, 91%, 60%);
   }
   
   .bg-sudan-blue {
-    background-color: hsl(228, 84%, 35%);
+    background-color: hsl(217, 91%, 60%);
   }
   
   .sudan-yellow {
-    color: hsl(44, 93%, 56%);
+    color: hsl(45, 100%, 58%);
   }
   
   .bg-sudan-yellow {
-    background-color: hsl(44, 93%, 56%);
+    background-color: hsl(45, 100%, 58%);
   }
   
   .sudan-red {
@@ -92,18 +95,91 @@
   }
   
   .medical-blue {
-    color: hsl(215, 83%, 59%);
+    color: hsl(210, 100%, 50%);
   }
   
   .bg-medical-blue {
-    background-color: hsl(215, 83%, 59%);
+    background-color: hsl(210, 100%, 50%);
   }
   
   .medical-green {
-    color: hsl(162, 94%, 30%);
+    color: hsl(142, 76%, 36%);
   }
   
   .bg-medical-green {
-    background-color: hsl(162, 94%, 30%);
+    background-color: hsl(142, 76%, 36%);
+  }
+  
+  .accent-purple {
+    color: hsl(262, 83%, 58%);
+  }
+  
+  .bg-accent-purple {
+    background-color: hsl(262, 83%, 58%);
+  }
+  
+  .bg-gradient-sudan {
+    background: linear-gradient(135deg, hsl(217, 91%, 60%) 0%, hsl(142, 76%, 36%) 100%);
+  }
+  
+  .bg-gradient-medical {
+    background: linear-gradient(135deg, hsl(210, 100%, 50%) 0%, hsl(262, 83%, 58%) 100%);
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, hsl(217, 91%, 60%) 0%, hsl(142, 76%, 36%) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .pulse-ring {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+  }
+  
+  .slide-up {
+    animation: slideUp 0.8s ease-out;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
