@@ -3,10 +3,10 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export default function ProjectOverview() {
   return (
-    <section id="overview" className="py-20">
+    <section id="overview" className="py-20 bg-gradient-to-br from-white to-wellness-mint/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Project Overview</h2>
+          <h2 className="text-4xl font-bold text-gradient-primary mb-4">Project Overview</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
             Tackling the critical healthcare challenge of automated blood disease diagnosis using state-of-the-art AI techniques
           </p>
@@ -22,9 +22,9 @@ export default function ProjectOverview() {
             </p>
             
             <div className="space-y-4">
-              <div className="flex items-start space-x-3">
-                <div className="w-6 h-6 bg-medical-green rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <Check className="text-white" size={14} />
+              <div className="flex items-start space-x-4">
+                <div className="w-8 h-8 bg-gradient-to-br from-healing-green to-success-green rounded-xl flex items-center justify-center flex-shrink-0 mt-1 shadow-lg">
+                  <Check className="text-white" size={16} />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Medical Domain Expertise</h4>
@@ -32,9 +32,9 @@ export default function ProjectOverview() {
                 </div>
               </div>
               
-              <div className="flex items-start space-x-3">
-                <div className="w-6 h-6 bg-medical-green rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <Check className="text-white" size={14} />
+              <div className="flex items-start space-x-4">
+                <div className="w-8 h-8 bg-gradient-to-br from-medical-secondary to-calm-teal rounded-xl flex items-center justify-center flex-shrink-0 mt-1 shadow-lg">
+                  <Check className="text-white" size={16} />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Ensemble Learning</h4>
@@ -42,9 +42,9 @@ export default function ProjectOverview() {
                 </div>
               </div>
               
-              <div className="flex items-start space-x-3">
-                <div className="w-6 h-6 bg-medical-green rounded-full flex items-center justify-center flex-shrink-0 mt-1">
-                  <Check className="text-white" size={14} />
+              <div className="flex items-start space-x-4">
+                <div className="w-8 h-8 bg-gradient-to-br from-medical-primary to-trust-blue rounded-xl flex items-center justify-center flex-shrink-0 mt-1 shadow-lg">
+                  <Check className="text-white" size={16} />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Strategic Optimization</h4>
@@ -54,7 +54,7 @@ export default function ProjectOverview() {
             </div>
           </div>
 
-          <Card className="shadow-xl">
+          <Card className="shadow-xl border-0 bg-gradient-to-br from-white to-soft-teal/5">
             <CardContent className="p-8">
               <h4 className="text-xl font-bold text-gray-900 mb-6">Dataset Overview</h4>
               <div className="space-y-4">

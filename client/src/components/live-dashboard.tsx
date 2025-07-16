@@ -90,12 +90,12 @@ export default function LiveDashboard() {
   }, []);
 
   const diseaseColors = {
-    'Diabetes': '#1e40af',
-    'Anemia': '#eab308', 
-    'Thalassemia': '#dc2626',
-    'Heart Disease': '#059669',
-    'Thrombocytopenia': '#7c3aed',
-    'Healthy': '#6b7280'
+    'Diabetes': 'hsl(210, 70%, 30%)',
+    'Anemia': 'hsl(35, 85%, 60%)', 
+    'Thalassemia': 'hsl(0, 70%, 55%)',
+    'Heart Disease': 'hsl(150, 60%, 45%)',
+    'Thrombocytopenia': 'hsl(262, 83%, 58%)',
+    'Healthy': 'hsl(180, 60%, 45%)'
   };
 
   const diseaseDistributionData = liveMetrics?.diseaseStats 
@@ -111,7 +111,7 @@ export default function LiveDashboard() {
       <section className="py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-sudan-blue mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-medical-primary mx-auto mb-4"></div>
             <p className="text-gray-600">Connecting to live data stream...</p>
           </div>
         </div>
@@ -120,11 +120,11 @@ export default function LiveDashboard() {
   }
 
   return (
-    <section id="live-dashboard" className="py-20 bg-gradient-to-br from-blue-50 via-white to-green-50/30">
+    <section id="live-dashboard" className="py-20 bg-gradient-to-br from-wellness-mint/5 via-white to-soft-teal/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between mb-12 slide-up">
           <div>
-            <h2 className="text-5xl font-bold text-gradient mb-4">Real-Time AI Dashboard</h2>
+            <h2 className="text-5xl font-bold text-gradient-primary mb-4">Real-Time AI Dashboard</h2>
             <p className="text-xl text-gray-600 leading-relaxed">Live monitoring of blood disease classification system</p>
           </div>
           <div className="flex items-center space-x-3 bg-white/80 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg">

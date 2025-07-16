@@ -1,6 +1,7 @@
 import NavigationHeader from "@/components/navigation-header";
 import HeroSection from "@/components/hero-section";
 import ProjectOverview from "@/components/project-overview";
+import FeaturesSection from "@/components/features-section";
 import TeamSection from "@/components/team-section";
 import DataVisualization from "@/components/data-visualization";
 import LiveDashboard from "@/components/live-dashboard";
@@ -18,6 +19,7 @@ export default function Dashboard() {
       <LiveDashboard />
       <RealTimeMetrics />
       <ProjectOverview />
+      <FeaturesSection />
       <TeamSection />
       <DataVisualization />
       <MethodologySection />
