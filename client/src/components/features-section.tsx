@@ -7,48 +7,54 @@ export default function FeaturesSection() {
       icon: Brain,
       title: "AI-Powered Analysis",
       description: "Advanced machine learning ensemble methods for accurate blood disease classification",
-      color: "from-medical-primary to-trust-blue",
-      bgColor: "bg-medical-primary"
+      color: "from-green-500 to-green-600",
+      bgColor: "bg-green-500",
+      borderColor: "border-green-200"
     },
     {
       icon: Activity,
-      title: "Real-time Monitoring",
+      title: "Real-time Monitoring", 
       description: "Live dashboard with WebSocket streaming for instant prediction results and analytics",
-      color: "from-medical-secondary to-calm-teal",
-      bgColor: "bg-medical-secondary"
+      color: "from-blue-500 to-blue-600",
+      bgColor: "bg-blue-500",
+      borderColor: "border-blue-200"
     },
     {
       icon: Shield,
       title: "Medical Grade Accuracy",
       description: "98.55%+ accuracy with confidence scoring using domain-specific medical features",
-      color: "from-healing-green to-success-green",
-      bgColor: "bg-healing-green"
+      color: "from-yellow-500 to-yellow-600",
+      bgColor: "bg-yellow-500",
+      borderColor: "border-yellow-200"
     },
     {
       icon: Zap,
       title: "Instant Predictions",
       description: "Fast classification of 6 blood disease types with immediate confidence metrics",
-      color: "from-info-cyan to-soft-teal",
-      bgColor: "bg-info-cyan"
+      color: "from-pink-500 to-pink-600",
+      bgColor: "bg-pink-500",
+      borderColor: "border-pink-200"
     },
     {
       icon: TrendingUp,
       title: "Performance Analytics",
       description: "Comprehensive metrics tracking with disease distribution and prediction trends",
-      color: "from-warning-amber to-alert-orange",
-      bgColor: "bg-warning-amber"
+      color: "from-purple-500 to-purple-600",
+      bgColor: "bg-purple-500",
+      borderColor: "border-purple-200"
     },
     {
       icon: Users,
       title: "Healthcare Impact",
       description: "Designed for resource-constrained environments to improve diagnostic accessibility",
-      color: "from-sudan-blue to-medical-primary",
-      bgColor: "bg-sudan-blue"
+      color: "from-teal-500 to-teal-600",
+      bgColor: "bg-teal-500",
+      borderColor: "border-teal-200"
     }
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-soft-teal/5 to-wellness-mint/10">
+    <section className="py-20 bg-gradient-to-br from-green-50 to-blue-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gradient-primary mb-4">Key Features</h2>
@@ -63,13 +69,13 @@ export default function FeaturesSection() {
             return (
               <Card 
                 key={index} 
-                className="group shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-0 bg-white/80 backdrop-blur-sm"
+                className={`group shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 ${feature.borderColor} bg-white hover:bg-gray-50/50`}
               >
                 <CardContent className="p-8">
-                  <div className={`w-16 h-16 bg-gradient-to-br ${feature.color} rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
-                    <IconComponent className="text-white" size={28} />
+                  <div className={`w-20 h-20 bg-gradient-to-br ${feature.color} rounded-3xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                    <IconComponent className="text-white" size={32} />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-medical-primary transition-colors duration-300">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 group-hover:text-blue-600 transition-colors duration-300">
                     {feature.title}
                   </h3>
                   <p className="text-gray-600 leading-relaxed">

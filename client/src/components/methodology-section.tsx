@@ -6,8 +6,9 @@ export default function MethodologySection() {
     {
       number: 1,
       title: "Data Analysis",
-      color: "bg-medical-primary",
-      gradient: "bg-gradient-to-br from-medical-primary to-trust-blue",
+      color: "bg-blue-600",
+      gradient: "bg-gradient-to-br from-blue-600 to-blue-700",
+      borderColor: "border-blue-200",
       items: [
         "24 medical features EDA",
         "Class distribution analysis", 
@@ -16,9 +17,10 @@ export default function MethodologySection() {
     },
     {
       number: 2,
-      title: "Feature Engineering",
-      color: "bg-medical-secondary",
-      gradient: "bg-gradient-to-br from-medical-secondary to-calm-teal",
+      title: "Feature Engineering", 
+      color: "bg-emerald-600",
+      gradient: "bg-gradient-to-br from-emerald-600 to-emerald-700",
+      borderColor: "border-emerald-200",
       items: [
         "13 medical domain features",
         "Blood ratio calculations",
@@ -28,8 +30,9 @@ export default function MethodologySection() {
     {
       number: 3,
       title: "Model Training",
-      color: "bg-healing-green",
-      gradient: "bg-gradient-to-br from-healing-green to-success-green",
+      color: "bg-purple-600",
+      gradient: "bg-gradient-to-br from-purple-600 to-purple-700",
+      borderColor: "border-purple-200",
       items: [
         "Ensemble learning approach",
         "Hyperparameter optimization",
@@ -39,8 +42,9 @@ export default function MethodologySection() {
     {
       number: 4,
       title: "Optimization",
-      color: "bg-info-cyan",
-      gradient: "bg-gradient-to-br from-info-cyan to-soft-teal",
+      color: "bg-amber-600",
+      gradient: "bg-gradient-to-br from-amber-600 to-amber-700", 
+      borderColor: "border-amber-200",
       items: [
         "Distribution matching",
         "Confidence-based assignment",
@@ -50,7 +54,7 @@ export default function MethodologySection() {
   ];
 
   return (
-    <section id="methodology" className="py-20 bg-gradient-to-br from-wellness-mint/10 to-soft-teal/10">
+    <section id="methodology" className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gradient-primary mb-4">Technical Methodology</h2>
@@ -61,9 +65,9 @@ export default function MethodologySection() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {phases.map((phase) => (
-            <Card key={phase.number} className="shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-0 bg-white/80 backdrop-blur-sm">
+            <Card key={phase.number} className={`shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 ${phase.borderColor} bg-white hover:bg-gray-50/50`}>
               <CardContent className="p-8">
-                <div className={`w-16 h-16 ${phase.gradient} rounded-2xl flex items-center justify-center text-white font-bold text-2xl mb-6 shadow-lg`}>
+                <div className={`w-20 h-20 ${phase.gradient} rounded-3xl flex items-center justify-center text-white font-bold text-3xl mb-6 shadow-lg`}>
                   {phase.number}
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-4">{phase.title}</h3>

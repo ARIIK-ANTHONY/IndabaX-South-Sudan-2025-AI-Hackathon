@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export default function ProjectOverview() {
   return (
-    <section id="overview" className="py-20 bg-gradient-to-br from-white to-wellness-mint/5">
+    <section id="overview" className="py-20 bg-gradient-to-br from-white to-emerald-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gradient-primary mb-4">Project Overview</h2>
@@ -23,8 +23,8 @@ export default function ProjectOverview() {
             
             <div className="space-y-4">
               <div className="flex items-start space-x-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-healing-green to-success-green rounded-xl flex items-center justify-center flex-shrink-0 mt-1 shadow-lg">
-                  <Check className="text-white" size={16} />
+                <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl flex items-center justify-center flex-shrink-0 mt-1 shadow-lg">
+                  <Check className="text-white" size={18} />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Medical Domain Expertise</h4>
@@ -33,8 +33,8 @@ export default function ProjectOverview() {
               </div>
               
               <div className="flex items-start space-x-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-medical-secondary to-calm-teal rounded-xl flex items-center justify-center flex-shrink-0 mt-1 shadow-lg">
-                  <Check className="text-white" size={16} />
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0 mt-1 shadow-lg">
+                  <Check className="text-white" size={18} />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Ensemble Learning</h4>
@@ -43,8 +43,8 @@ export default function ProjectOverview() {
               </div>
               
               <div className="flex items-start space-x-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-medical-primary to-trust-blue rounded-xl flex items-center justify-center flex-shrink-0 mt-1 shadow-lg">
-                  <Check className="text-white" size={16} />
+                <div className="w-10 h-10 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 mt-1 shadow-lg">
+                  <Check className="text-white" size={18} />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Strategic Optimization</h4>
