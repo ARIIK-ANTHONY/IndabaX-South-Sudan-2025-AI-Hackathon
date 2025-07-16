@@ -4,6 +4,12 @@
 
 This is a full-stack web application for automated blood disease classification using machine learning with real-time data visualization. The system provides an AI-powered solution for diagnosing blood diseases based on medical laboratory test results, featuring an ensemble learning approach with medical domain expertise and live streaming analytics dashboard.
 
+## Recent Changes (January 16, 2025)
+- Updated color scheme to professional healthcare palette inspired by Figma design
+- Implemented medical-focused color variables with trust blue, healing green, and calming teal
+- Enhanced accessibility with WCAG-compliant color contrasts
+- Updated hero section, navigation, and demo interface with new healthcare branding
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.

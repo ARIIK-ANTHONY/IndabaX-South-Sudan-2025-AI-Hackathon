@@ -83,10 +83,10 @@ export default function DemoSection() {
   };
 
   return (
-    <section id="demo" className="py-24 bg-gradient-to-br from-gray-50 to-blue-50/30">
+    <section id="demo" className="py-24 bg-gradient-to-br from-wellness-mint/20 to-soft-teal/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20 slide-up">
-          <h2 className="text-5xl font-bold text-gradient mb-6">Interactive Prediction Demo</h2>
+          <h2 className="text-5xl font-bold text-gradient-primary mb-6">Interactive Prediction Demo</h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Experience our advanced blood disease classification model in real-time with live AI predictions
           </p>
@@ -109,7 +109,7 @@ export default function DemoSection() {
                   placeholder="85-180"
                   value={formData.glucose || ""}
                   onChange={handleInputChange("glucose")}
-                  className="focus:ring-2 focus:ring-sudan-blue focus:border-transparent"
+                  className="focus:ring-2 focus:ring-medical-primary focus:border-transparent"
                 />
               </div>
               
@@ -123,7 +123,7 @@ export default function DemoSection() {
                   placeholder="12-16"
                   value={formData.hemoglobin || ""}
                   onChange={handleInputChange("hemoglobin")}
-                  className="focus:ring-2 focus:ring-sudan-blue focus:border-transparent"
+                  className="focus:ring-2 focus:ring-medical-primary focus:border-transparent"
                 />
               </div>
               
@@ -137,7 +137,7 @@ export default function DemoSection() {
                   placeholder="150-450"
                   value={formData.platelets || ""}
                   onChange={handleInputChange("platelets")}
-                  className="focus:ring-2 focus:ring-sudan-blue focus:border-transparent"
+                  className="focus:ring-2 focus:ring-medical-primary focus:border-transparent"
                 />
               </div>
               
@@ -151,7 +151,7 @@ export default function DemoSection() {
                   placeholder="150-250"
                   value={formData.cholesterol || ""}
                   onChange={handleInputChange("cholesterol")}
-                  className="focus:ring-2 focus:ring-sudan-blue focus:border-transparent"
+                  className="focus:ring-2 focus:ring-medical-primary focus:border-transparent"
                 />
               </div>
               
@@ -165,7 +165,7 @@ export default function DemoSection() {
                   placeholder="4-11"
                   value={formData.whiteBloodCells || ""}
                   onChange={handleInputChange("whiteBloodCells")}
-                  className="focus:ring-2 focus:ring-sudan-blue focus:border-transparent"
+                  className="focus:ring-2 focus:ring-medical-primary focus:border-transparent"
                 />
               </div>
               
@@ -179,7 +179,7 @@ export default function DemoSection() {
                   placeholder="35-45"
                   value={formData.hematocrit || ""}
                   onChange={handleInputChange("hematocrit")}
-                  className="focus:ring-2 focus:ring-sudan-blue focus:border-transparent"
+                  className="focus:ring-2 focus:ring-medical-primary focus:border-transparent"
                 />
               </div>
             </div>
@@ -188,7 +188,7 @@ export default function DemoSection() {
               <Button
                 onClick={handlePredict}
                 disabled={predictMutation.isPending}
-                className="bg-gradient-sudan hover:opacity-90 text-white px-12 py-4 rounded-xl font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-xl"
+                className="bg-gradient-primary hover:opacity-90 text-white px-12 py-4 rounded-xl font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-xl"
               >
                 {predictMutation.isPending ? (
                   <div className="flex items-center gap-3">
@@ -205,21 +205,21 @@ export default function DemoSection() {
             </div>
 
             {result && (
-              <div className="border-0 rounded-2xl p-8 bg-gradient-to-br from-blue-50 to-green-50 shadow-xl slide-up">
+              <div className="border-0 rounded-2xl p-8 bg-gradient-to-br from-wellness-mint/30 to-soft-teal/30 shadow-xl slide-up">
                 <h4 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
                   🔬 AI Prediction Results
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   <div className="bg-white rounded-xl p-6 shadow-lg">
                     <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Predicted Condition</p>
-                    <p className="text-3xl font-bold text-gradient">{result.prediction}</p>
+                    <p className="text-3xl font-bold text-gradient-primary">{result.prediction}</p>
                   </div>
                   <div className="bg-white rounded-xl p-6 shadow-lg">
                     <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">Confidence Score</p>
                     <div className="flex items-center space-x-4">
                       <div className="flex-1 bg-gray-200 rounded-full h-6">
                         <div 
-                          className="bg-gradient-sudan h-6 rounded-full transition-all duration-500 flex items-center justify-end pr-2" 
+                          className="bg-gradient-healing h-6 rounded-full transition-all duration-500 flex items-center justify-end pr-2" 
                           style={{ width: `${result.confidence * 100}%` }}
                         >
                           <span className="text-white text-xs font-bold">
@@ -233,9 +233,9 @@ export default function DemoSection() {
                     </div>
                   </div>
                 </div>
-                <div className="mt-6 p-6 bg-white/70 backdrop-blur-sm rounded-xl border-l-4 border-l-sudan-yellow">
+                <div className="mt-6 p-6 bg-white/70 backdrop-blur-sm rounded-xl border-l-4 border-l-warning-amber">
                   <p className="text-sm text-gray-700 leading-relaxed">
-                    <strong className="text-sudan-blue">⚠️ Medical Disclaimer:</strong> This is an AI demonstration for educational purposes only. Always consult qualified healthcare professionals for medical diagnosis and treatment decisions.
+                    <strong className="text-medical-primary">⚠️ Medical Disclaimer:</strong> This is an AI demonstration for educational purposes only. Always consult qualified healthcare professionals for medical diagnosis and treatment decisions.
                   </p>
                 </div>
               </div>

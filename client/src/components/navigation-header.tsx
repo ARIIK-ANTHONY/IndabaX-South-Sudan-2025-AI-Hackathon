@@ -6,12 +6,12 @@ export default function NavigationHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="bg-white shadow-lg border-b-4 bg-sudan-blue sticky top-0 z-50">
+    <nav className="bg-white shadow-lg border-b-4 border-medical-primary sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-4">
             <div className="flex-shrink-0">
-              <div className="w-10 h-10 bg-sudan-blue rounded-lg flex items-center justify-center">
+              <div className="w-10 h-10 bg-medical-primary rounded-lg flex items-center justify-center">
                 <Brain className="text-white" size={20} />
               </div>
             </div>
@@ -22,16 +22,16 @@ export default function NavigationHeader() {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#live-dashboard" className="text-gray-700 hover:text-sudan-blue transition-colors">Live Dashboard</a>
-            <a href="#overview" className="text-gray-700 hover:text-sudan-blue transition-colors">Overview</a>
-            <a href="#team" className="text-gray-700 hover:text-sudan-blue transition-colors">Team</a>
-            <a href="#results" className="text-gray-700 hover:text-sudan-blue transition-colors">Results</a>
-            <a href="#demo" className="text-gray-700 hover:text-sudan-blue transition-colors">Demo</a>
+            <a href="#live-dashboard" className="text-gray-700 hover:text-medical-primary transition-colors">Live Dashboard</a>
+            <a href="#overview" className="text-gray-700 hover:text-medical-primary transition-colors">Overview</a>
+            <a href="#team" className="text-gray-700 hover:text-medical-primary transition-colors">Team</a>
+            <a href="#results" className="text-gray-700 hover:text-medical-primary transition-colors">Results</a>
+            <a href="#demo" className="text-gray-700 hover:text-medical-primary transition-colors">Demo</a>
             <a 
               href="https://github.com/ARIIK-ANTHONY/IndabaX-South-Sudan-2025-AI-Hackathon"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-sudan-blue text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center gap-2"
+              className="bg-medical-primary text-white px-4 py-2 rounded-lg hover:bg-trust-blue transition-colors inline-flex items-center gap-2"
             >
               <Github size={16} />
               GitHub
@@ -52,16 +52,16 @@ export default function NavigationHeader() {
         {mobileMenuOpen && (
           <div className="md:hidden pb-4">
             <div className="flex flex-col space-y-2">
-              <a href="#live-dashboard" className="text-gray-700 hover:text-sudan-blue py-2">Live Dashboard</a>
-              <a href="#overview" className="text-gray-700 hover:text-sudan-blue py-2">Overview</a>
-              <a href="#team" className="text-gray-700 hover:text-sudan-blue py-2">Team</a>
-              <a href="#results" className="text-gray-700 hover:text-sudan-blue py-2">Results</a>
-              <a href="#demo" className="text-gray-700 hover:text-sudan-blue py-2">Demo</a>
+              <a href="#live-dashboard" className="text-gray-700 hover:text-medical-primary py-2">Live Dashboard</a>
+              <a href="#overview" className="text-gray-700 hover:text-medical-primary py-2">Overview</a>
+              <a href="#team" className="text-gray-700 hover:text-medical-primary py-2">Team</a>
+              <a href="#results" className="text-gray-700 hover:text-medical-primary py-2">Results</a>
+              <a href="#demo" className="text-gray-700 hover:text-medical-primary py-2">Demo</a>
               <a 
                 href="https://github.com/ARIIK-ANTHONY/IndabaX-South-Sudan-2025-AI-Hackathon"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-sudan-blue text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center gap-2 w-fit"
+                className="bg-medical-primary text-white px-4 py-2 rounded-lg hover:bg-trust-blue transition-colors inline-flex items-center gap-2 w-fit"
               >
                 <Github size={16} />
                 GitHub
