@@ -22,6 +22,7 @@ export default function NavigationHeader() {
           </div>
           
           <div className="hidden md:flex items-center space-x-8">
+            <a href="#live-dashboard" className="text-gray-700 hover:text-sudan-blue transition-colors">Live Dashboard</a>
             <a href="#overview" className="text-gray-700 hover:text-sudan-blue transition-colors">Overview</a>
             <a href="#team" className="text-gray-700 hover:text-sudan-blue transition-colors">Team</a>
             <a href="#results" className="text-gray-700 hover:text-sudan-blue transition-colors">Results</a>
@@ -51,6 +52,7 @@ export default function NavigationHeader() {
         {mobileMenuOpen && (
           <div className="md:hidden pb-4">
             <div className="flex flex-col space-y-2">
+              <a href="#live-dashboard" className="text-gray-700 hover:text-sudan-blue py-2">Live Dashboard</a>
               <a href="#overview" className="text-gray-700 hover:text-sudan-blue py-2">Overview</a>
               <a href="#team" className="text-gray-700 hover:text-sudan-blue py-2">Team</a>
               <a href="#results" className="text-gray-700 hover:text-sudan-blue py-2">Results</a>

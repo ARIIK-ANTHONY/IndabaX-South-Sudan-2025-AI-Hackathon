@@ -3,6 +3,8 @@ import HeroSection from "@/components/hero-section";
 import ProjectOverview from "@/components/project-overview";
 import TeamSection from "@/components/team-section";
 import DataVisualization from "@/components/data-visualization";
+import LiveDashboard from "@/components/live-dashboard";
+import RealTimeMetrics from "@/components/real-time-metrics";
 import MethodologySection from "@/components/methodology-section";
 import DemoSection from "@/components/demo-section";
 import ResultsSection from "@/components/results-section";
@@ -13,6 +15,8 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gray-50">
       <NavigationHeader />
       <HeroSection />
+      <LiveDashboard />
+      <RealTimeMetrics />
       <ProjectOverview />
       <TeamSection />
       <DataVisualization />

@@ -1,8 +1,8 @@
-# Blood Disease Classification AI System
+# Blood Disease Classification AI System - Live Dashboard
 
 ## Overview
 
-This is a full-stack web application for automated blood disease classification using machine learning. The system provides an AI-powered solution for diagnosing blood diseases based on medical laboratory test results, featuring an ensemble learning approach with medical domain expertise.
+This is a full-stack web application for automated blood disease classification using machine learning with real-time data visualization. The system provides an AI-powered solution for diagnosing blood diseases based on medical laboratory test results, featuring an ensemble learning approach with medical domain expertise and live streaming analytics dashboard.
 
 ## User Preferences
 
@@ -47,6 +47,8 @@ Preferred communication style: Simple, everyday language.
 
 ### UI Components
 - **Landing Page**: Hero section with statistics and project overview
+- **Live Dashboard**: Real-time data visualization with WebSocket streaming
+- **Real-Time Metrics**: Live analytics with performance charts and recent predictions
 - **Team Section**: Member profiles and roles
 - **Data Visualization**: Charts showing disease distribution and feature importance
 - **Interactive Demo**: Live prediction interface with form inputs
@@ -75,6 +77,8 @@ Preferred communication style: Simple, everyday language.
 - **Session**: Connect-pg-simple for PostgreSQL session storage
 - **Validation**: Zod for runtime type checking
 - **ORM**: Drizzle ORM with PostgreSQL dialect
+- **WebSockets**: ws for real-time data streaming
+- **Real-time**: Live metrics and prediction monitoring
 
 ### Development Tools
 - **Build**: Vite with React plugin

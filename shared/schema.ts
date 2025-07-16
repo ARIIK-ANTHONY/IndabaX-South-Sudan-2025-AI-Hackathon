@@ -21,6 +21,15 @@ export const predictions = pgTable("predictions", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 
+export const liveMetrics = pgTable("live_metrics", {
+  id: serial("id").primaryKey(),
+  totalPredictions: integer("total_predictions").notNull(),
+  accuracyRate: real("accuracy_rate").notNull(),
+  diseaseBreakdown: text("disease_breakdown").notNull(), // JSON string
+  avgConfidence: real("avg_confidence").notNull(),
+  timestamp: timestamp("timestamp").defaultNow().notNull(),
+});
+
 export const insertUserSchema = createInsertSchema(users).pick({
   username: true,
   password: true,
@@ -33,7 +42,14 @@ export const insertPredictionSchema = createInsertSchema(predictions).omit({
   createdAt: true,
 });
 
+export const insertLiveMetricsSchema = createInsertSchema(liveMetrics).omit({
+  id: true,
+  timestamp: true,
+});
+
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
 export type InsertPrediction = z.infer<typeof insertPredictionSchema>;
 export type Prediction = typeof predictions.$inferSelect;
+export type LiveMetrics = typeof liveMetrics.$inferSelect;
+export type InsertLiveMetrics = z.infer<typeof insertLiveMetricsSchema>;
