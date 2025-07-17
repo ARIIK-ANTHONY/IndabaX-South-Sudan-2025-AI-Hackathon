@@ -18,7 +18,28 @@ export function Chatbot() {
   const [input, setInput] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [showWelcomePopup, setShowWelcomePopup] = useState(false);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  
+  // Show welcome popup when component mounts
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowWelcomePopup(true);
+    }, 2000); // Show popup after 2 seconds
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Auto-hide welcome popup after 5 seconds
+  useEffect(() => {
+    if (showWelcomePopup) {
+      const timer = setTimeout(() => {
+        setShowWelcomePopup(false);
+      }, 5000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [showWelcomePopup]);
   
   // Create a new chat session when the chatbot is opened
   useEffect(() => {
@@ -134,6 +155,48 @@ export function Chatbot() {
 
   return (
     <div className="fixed bottom-4 right-4 z-50">
+      {/* Welcome Popup */}
+      {showWelcomePopup && !isOpen && (
+        <Card className="w-80 mb-4 p-4 shadow-xl animate-in slide-in-from-bottom-2 fade-in-0">
+          <div className="flex items-start gap-3">
+            <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center flex-shrink-0">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-primary-foreground">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+              </svg>
+            </div>
+            <div className="flex-1">
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="font-semibold text-sm">CodeNomads Assistant</h3>
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  onClick={() => setShowWelcomePopup(false)}
+                  className="h-6 w-6 text-muted-foreground hover:text-foreground"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M18 6 6 18"></path>
+                    <path d="m6 6 12 12"></path>
+                  </svg>
+                </Button>
+              </div>
+              <p className="text-sm text-muted-foreground mb-3">
+                👋 Welcome to our Blood Disease Prediction platform! I'm here to help you navigate through our AI-powered medical analysis system. 
+              </p>
+              <Button 
+                size="sm" 
+                onClick={() => {
+                  setShowWelcomePopup(false);
+                  setIsOpen(true);
+                }}
+                className="w-full"
+              >
+                Start Chat
+              </Button>
+            </div>
+          </div>
+        </Card>
+      )}
+
       {!isOpen ? (
         <Button 
           onClick={() => setIsOpen(true)}

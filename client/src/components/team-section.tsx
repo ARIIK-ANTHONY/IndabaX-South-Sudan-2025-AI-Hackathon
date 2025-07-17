@@ -59,12 +59,22 @@ export default function TeamSection() {
                   {member.description}
                 </p>
                 <div className="flex justify-center space-x-4">
-                  <button className="text-gray-400 hover:text-sudan-blue transition-colors">
+                  <a 
+                    href={member.linkedin} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-sudan-blue transition-colors"
+                  >
                     <Linkedin size={20} />
-                  </button>
-                  <button className="text-gray-400 hover:text-sudan-blue transition-colors">
+                  </a>
+                  <a 
+                    href={member.github} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-sudan-blue transition-colors"
+                  >
                     <Github size={20} />
-                  </button>
+                  </a>
                 </div>
               </CardContent>
             </Card>

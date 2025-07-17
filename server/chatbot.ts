@@ -307,7 +307,7 @@ function createKnowledgeBase(data: any) {
       keywords: ['total', 'predictions', 'total predictions'],
       responses: [
         `Currently, we have ${data.totalPredictions} total predictions in our system with an average confidence of ${data.avgConfidence} and model accuracy of ${data.modelAccuracy}.`,
-        `Our dashboard shows ${data.totalPredictions} total predictions with ${data.activeCases} active cases. The model accuracy is ${data.modelAccuracy}, which is above our target of 98.55%.`,
+        `Our dashboard shows ${data.totalPredictions} total predictions with ${data.activeCases} active cases. The model accuracy is ${data.modelAccuracy}, which is above our target of 98.559%.`,
         `We've made ${data.totalPredictions} predictions so far with an average confidence level of ${data.avgConfidence}. Our system is performing above the target accuracy with ${data.modelAccuracy} accuracy.`
       ]
     },
@@ -397,7 +397,7 @@ const knowledgeBase = [
     keywords: ['prediction', 'predictions', 'test results', 'blood test', 'results'],
     responses: [
       'I\'d be happy to help you understand your blood test results. Our AI system analyzes multiple blood parameters to identify potential conditions. Can you share your specific test values, or would you like me to explain what different blood markers indicate?',
-      'Understanding your blood test results is crucial for your health. Our prediction system has 98.55% accuracy in identifying conditions like diabetes, anemia, and other blood disorders. What specific results would you like me to explain?',
+      'Understanding your blood test results is crucial for your health. Our prediction system has 98.559% accuracy in identifying conditions like diabetes, anemia, and other blood disorders. What specific results would you like me to explain?',
       'Blood test interpretation can be complex, but I\'m here to help you understand what your results mean. Each parameter tells us something different about your health. What concerns do you have about your results?'
     ]
   },
@@ -412,7 +412,7 @@ const knowledgeBase = [
   {
     keywords: ['accuracy', 'confidence', 'reliable'],
     responses: [
-      'Our blood disease prediction system has a target accuracy of 98.55%. Each prediction comes with a confidence score that indicates how certain the system is about the result.',
+      'Our blood disease prediction system has a target accuracy of 98.559%. Each prediction comes with a confidence score that indicates how certain the system is about the result.',
       'The system\'s predictions are highly reliable with training accuracy of 100% and validation accuracy of 100%. In real-world use, we maintain an accuracy rate above 98%.',
       'Confidence scores for predictions typically range from 75% to 100%, with most predictions having confidence levels above 85%.'
     ]
@@ -444,7 +444,7 @@ const knowledgeBase = [
   {
     keywords: ['platform', 'website', 'system'],
     responses: [
-      'Our Blood Disease Prediction platform is an AI-powered medical diagnostics system with 98.55%+ accuracy using advanced ensemble methods.',
+      'Our Blood Disease Prediction platform is an AI-powered medical diagnostics system with 98.559%+ accuracy using advanced ensemble methods.',
       'The platform provides real-time monitoring of blood disease classification with live tracking of predictions, model accuracy, and confidence levels.',
       'Our system is designed for resource-constrained environments to improve diagnostic accessibility with medical-grade accuracy.'
     ]
@@ -509,7 +509,7 @@ const knowledgeBase = [
     keywords: ['key features', 'features'],
     responses: [
       `Our platform offers six key features: ${dashboardData.keyFeatures[0]}; ${dashboardData.keyFeatures[1]}; ${dashboardData.keyFeatures[2]}; ${dashboardData.keyFeatures[3]}; ${dashboardData.keyFeatures[4]}; and ${dashboardData.keyFeatures[5]}.`,
-      `The key features of our Blood Disease Prediction platform include AI-Powered Analysis with advanced machine learning, Real-time Monitoring with WebSocket streaming, Medical Grade Accuracy of 98.55%+, Instant Predictions for 6 blood disease types, comprehensive Performance Analytics, and Healthcare Impact for resource-constrained environments.`,
+      `The key features of our Blood Disease Prediction platform include AI-Powered Analysis with advanced machine learning, Real-time Monitoring with WebSocket streaming, Medical Grade Accuracy of 98.559%+, Instant Predictions for 6 blood disease types, comprehensive Performance Analytics, and Healthcare Impact for resource-constrained environments.`,
       `Our system's key features include ${dashboardData.keyFeatures[0].split(':')[0]}, ${dashboardData.keyFeatures[1].split(':')[0]}, ${dashboardData.keyFeatures[2].split(':')[0]}, ${dashboardData.keyFeatures[3].split(':')[0]}, ${dashboardData.keyFeatures[4].split(':')[0]}, and ${dashboardData.keyFeatures[5].split(':')[0]}.`
     ]
   },
@@ -517,7 +517,7 @@ const knowledgeBase = [
     keywords: ['total', 'predictions', 'total predictions'],
     responses: [
       `Currently, we have ${dashboardData.totalPredictions} total predictions in our system with an average confidence of ${dashboardData.avgConfidence} and model accuracy of ${dashboardData.modelAccuracy}.`,
-      `Our dashboard shows ${dashboardData.totalPredictions} total predictions with ${dashboardData.activeCases} active cases. The model accuracy is ${dashboardData.modelAccuracy}, which is above our target of 98.55%.`,
+      `Our dashboard shows ${dashboardData.totalPredictions} total predictions with ${dashboardData.activeCases} active cases. The model accuracy is ${dashboardData.modelAccuracy}, which is above our target of 98.559%.`,
       `We've made ${dashboardData.totalPredictions} predictions so far with an average confidence level of ${dashboardData.avgConfidence}. Our system is performing above the target accuracy with ${dashboardData.modelAccuracy} accuracy.`
     ]
   },

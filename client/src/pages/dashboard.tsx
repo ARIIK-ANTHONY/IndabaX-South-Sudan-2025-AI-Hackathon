@@ -1,5 +1,6 @@
 import NavigationHeader from "@/components/navigation-header";
 import HeroSection from "@/components/hero-section";
+import AboutSection from "@/components/about-section";
 import ProjectOverview from "@/components/project-overview";
 import FeaturesSection from "@/components/features-section";
 import TeamSection from "@/components/team-section";
@@ -33,6 +34,7 @@ export default function Dashboard() {
         <NavigationHeader />
         <main className="pt-20"> {/* Add padding-top for fixed navigation */}
         <HeroSection />
+        <AboutSection />
         <LiveDashboard />
         <RealTimeMetrics />
         <ProjectOverview />

@@ -75,7 +75,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         medicalFeatures: 24,
         engineeredFeatures: 13,
         diseaseClasses: 6,
-        targetAccuracy: 98.55,
+        targetAccuracy: 98.559,
         trainingAccuracy: 100.0,
         validationAccuracy: 100.0,
       };
@@ -103,7 +103,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       
       const liveData = {
         totalPredictions,
-        accuracyRate: 0.9855 + (Math.random() * 0.01 - 0.005), // Small variance around 98.55%
+        accuracyRate: 0.98559 + (Math.random() * 0.01 - 0.005), // Small variance around 98.559%
         activeCases,
         diseaseStats,
         avgConfidence: avgConfidence + (Math.random() * 0.02 - 0.01), // Small variance
@@ -411,7 +411,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       const totalPredictions = updatedPredictions.length;
       
       // Calculate dynamic metrics with more visible changes
-      const baseAccuracy = 0.9855;
+      const baseAccuracy = 0.98559;
       const accuracyVariance = (Math.random() - 0.5) * 0.02; // ±1% variance
       const dynamicAccuracy = Math.max(0.95, Math.min(0.999, baseAccuracy + accuracyVariance));
       

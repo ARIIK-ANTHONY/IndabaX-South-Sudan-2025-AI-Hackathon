@@ -118,11 +118,20 @@ export default function Footer() {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-gray-900">Team</h4>
-            <ul className="space-y-2 text-black">
-              <li>ARIIK ANTHONY MATHIANG</li>
-              <li>JONGKUCH CHOL ANYAR</li>
-              <li>JOK JOHN MAKEER</li>
+            <h4 className="text-lg font-semibold mb-4 text-gray-900">Acknowledgments</h4>
+            <ul className="space-y-2 text-gray-600">
+              <li>
+                <a href="https://www.sceniushub.com/event-list" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 transition-colors">
+                  Scenius Hub - Event Organizer
+                </a>
+              </li>
+              <li>
+                <a href="https://www.instagram.com/sceniushub?igsh=MWNwOWNkOTAwOWk3MQ==" target="_blank" rel="noopener noreferrer" className="hover:text-gray-900 transition-colors">
+                  @sceniushub on Instagram
+                </a>
+              </li>
+              <li>IndabaX South Sudan 2025</li>
+              <li>Deep Learning Indaba Community</li>
             </ul>
           </div>
         </div>

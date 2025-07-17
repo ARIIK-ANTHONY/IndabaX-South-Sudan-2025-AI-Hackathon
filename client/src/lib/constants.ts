@@ -1,21 +1,27 @@
 export const TEAM_MEMBERS = [
   {
     name: "ARIIK ANTHONY MATHIANG",
-    role: "ML Engineer",
-    description: "Solution architect specializing in medical domain feature engineering and ensemble model implementation.",
-    avatar: "A"
+    role: "Software Engineer",
+    description: "",
+    avatar: "A",
+    github: "https://github.com/ARIIK-ANTHONY",
+    linkedin: "https://www.linkedin.com/in/anthony-ariik-43812a308/"
   },
   {
     name: "JONGKUCH CHOL ANYAR", 
-    role: "Data Scientist",
-    description: "Expert in data analysis and machine learning model optimization with focus on healthcare applications.",
-    avatar: "J"
+    role: "Software Engineer",
+    description: "",
+    avatar: "J",
+    github: "https://github.com/Jongkuch1",
+    linkedin: "https://www.linkedin.com/in/jongkuch-anyar-36535131b/"
   },
   {
     name: "JOK JOHN MAKEER",
-    role: "ML Engineer", 
-    description: "Specialized in feature engineering and model validation with extensive experience in ensemble methods.",
-    avatar: "J"
+    role: "Software Engineer", 
+    description: "",
+    avatar: "J",
+    github: "https://github.com/JokMaker",
+    linkedin: "https://www.linkedin.com/in/jok-maker-kur-5125a3246/"
   }
 ];
 
@@ -50,7 +56,7 @@ export const MEDICAL_FEATURES = [
 ];
 
 export const PROJECT_STATS = {
-  targetAccuracy: 98.55,
+  targetAccuracy: 98.559,
   medicalParameters: 24,
   diseaseTypes: 6,
   trainingSamples: 0, // Will be updated dynamically

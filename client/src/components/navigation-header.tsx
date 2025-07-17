@@ -9,6 +9,7 @@ export default function NavigationHeader() {
 
   const navItems = [
     { href: "#live-dashboard", label: "Live Dashboard" },
+    { href: "#about", label: "About" },
     { href: "#overview", label: "Overview" },
     { href: "#team", label: "Team" },
     { href: "#results", label: "Results" },
