@@ -1,7 +1,23 @@
 import { Check } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useQuery } from "@tanstack/react-query";
+
+interface StatsData {
+  totalSamples: number;
+  testSamples: number;
+  medicalFeatures: number;
+  engineeredFeatures: number;
+  diseaseClasses: number;
+  targetAccuracy: number;
+  trainingAccuracy: number;
+  validationAccuracy: number;
+}
 
 export default function ProjectOverview() {
+  const { data: stats } = useQuery<StatsData>({
+    queryKey: ["/api/stats"],
+  });
+
   return (
     <section id="overview" className="py-20 bg-gradient-to-br from-white to-emerald-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -60,23 +76,27 @@ export default function ProjectOverview() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
                   <span className="text-gray-700">Training Samples</span>
-                  <span className="font-semibold text-gray-900">2,351</span>
+                  <span className="font-semibold text-gray-900">
+                    {stats?.totalSamples ? stats.totalSamples.toLocaleString() : "Loading..."}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
                   <span className="text-gray-700">Test Samples</span>
-                  <span className="font-semibold text-gray-900">486</span>
+                  <span className="font-semibold text-gray-900">
+                    {stats?.testSamples ? stats.testSamples.toLocaleString() : "Loading..."}
+                  </span>
                 </div>
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
                   <span className="text-gray-700">Medical Features</span>
-                  <span className="font-semibold text-gray-900">24</span>
+                  <span className="font-semibold text-gray-900">{stats?.medicalFeatures || 24}</span>
                 </div>
                 <div className="flex justify-between items-center py-3 border-b border-gray-100">
                   <span className="text-gray-700">Engineered Features</span>
-                  <span className="font-semibold text-gray-900">13</span>
+                  <span className="font-semibold text-gray-900">{stats?.engineeredFeatures || 13}</span>
                 </div>
                 <div className="flex justify-between items-center py-3">
                   <span className="text-gray-700">Disease Classes</span>
-                  <span className="font-semibold text-gray-900">6</span>
+                  <span className="font-semibold text-gray-900">{stats?.diseaseClasses || 6}</span>
                 </div>
               </div>
             </CardContent>

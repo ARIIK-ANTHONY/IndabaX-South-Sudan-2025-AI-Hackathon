@@ -5,8 +5,12 @@ import { TrendingUp, CheckCircle, RotateCcw, Target } from "lucide-react";
 
 export default function DataVisualization() {
   return (
-    <section id="data-viz" className="py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="data-viz" className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50/50 relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-15">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50/20 via-white to-gray-50/10"></div>
+      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Data Insights & Visualizations</h2>
           <p className="text-xl text-gray-600">

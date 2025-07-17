@@ -4,8 +4,12 @@ import { Trophy, Github, Play } from "lucide-react";
 
 export default function ResultsSection() {
   return (
-    <section id="results" className="py-20 bg-gray-100">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="results" className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50/50 relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-15">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50/20 via-white to-gray-50/10"></div>
+      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Results & Achievements</h2>
           <p className="text-xl text-gray-600">
@@ -19,7 +23,7 @@ export default function ResultsSection() {
             <CardContent className="p-8">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Competition Performance</h3>
               <div className="space-y-6">
-                <div className="flex items-center justify-between p-4 bg-gradient-to-r from-medical-green to-green-600 rounded-lg text-white">
+                <div className="flex items-center justify-between p-4 bg-gradient-to-r from-emerald-500 to-teal-600 rounded-lg text-white">
                   <div>
                     <p className="text-green-100">Expected Score</p>
                     <p className="text-3xl font-bold">98.55%+</p>
@@ -112,9 +116,9 @@ export default function ResultsSection() {
 
         {/* Call to Action */}
         <div className="mt-16 text-center">
-          <div className="bg-gradient-to-r from-sudan-blue to-blue-800 rounded-2xl p-12 text-white">
+          <div className="bg-gradient-to-r from-emerald-600 to-teal-700 rounded-2xl p-12 text-white">
             <h3 className="text-3xl font-bold mb-4">Explore Our Solution</h3>
-            <p className="text-xl text-blue-100 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-emerald-100 mb-8 max-w-3xl mx-auto">
               Dive deep into our codebase, methodology, and technical implementation. 
               All code and documentation available on GitHub.
             </p>

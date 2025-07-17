@@ -9,6 +9,7 @@ import { format } from "date-fns";
 interface LiveMetrics {
   totalPredictions: number;
   accuracyRate: number;
+  activeCases?: number;
   diseaseStats: { [key: string]: number };
   avgConfidence: number;
   recentPredictions: any[];
@@ -26,9 +27,26 @@ export default function LiveDashboard() {
   const [liveMetrics, setLiveMetrics] = useState<LiveMetrics | null>(null);
   const [historicalData, setHistoricalData] = useState<HistoricalData[]>([]);
   const [isConnected, setIsConnected] = useState(false);
+  const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
   const wsRef = useRef<WebSocket | null>(null);
+  const isConnectedRef = useRef(false);
 
   useEffect(() => {
+    // Function to fetch initial data via REST API
+    const fetchInitialData = async () => {
+      try {
+        const response = await fetch('/api/live-metrics');
+        const data = await response.json();
+        setLiveMetrics(data);
+        setLastUpdate(new Date());
+      } catch (error) {
+        console.error('Failed to fetch initial live metrics:', error);
+      }
+    };
+
+    // Fetch initial data first
+    fetchInitialData();
+
     // Connect to WebSocket for real-time updates
     const protocol = window.location.protocol === "https:" ? "wss:" : "ws:";
     const wsUrl = `${protocol}//${window.location.host}/ws`;
@@ -40,6 +58,7 @@ export default function LiveDashboard() {
       ws.onopen = () => {
         console.log("WebSocket connected");
         setIsConnected(true);
+        isConnectedRef.current = true;
       };
 
       ws.onmessage = (event) => {
@@ -48,6 +67,7 @@ export default function LiveDashboard() {
           if (message.type === 'live-update') {
             const newMetrics = message.data;
             setLiveMetrics(newMetrics);
+            setLastUpdate(new Date());
             
             // Add to historical data
             const historicalPoint: HistoricalData = {
@@ -70,24 +90,34 @@ export default function LiveDashboard() {
       ws.onclose = () => {
         console.log("WebSocket disconnected");
         setIsConnected(false);
-        // Attempt to reconnect after 3 seconds
-        setTimeout(connectWebSocket, 3000);
+        isConnectedRef.current = false;
+        // Attempt to reconnect after 30 seconds to match the update interval
+        setTimeout(connectWebSocket, 5000);
       };
 
       ws.onerror = (error) => {
         console.error("WebSocket error:", error);
         setIsConnected(false);
+        isConnectedRef.current = false;
       };
     };
 
     connectWebSocket();
 
+    // Fallback: refresh data every 30 seconds if WebSocket is not connected
+    const refreshInterval = setInterval(() => {
+      if (!isConnectedRef.current) {
+        fetchInitialData();
+      }
+    }, 5000);
+
     return () => {
       if (wsRef.current) {
         wsRef.current.close();
       }
+      clearInterval(refreshInterval);
     };
-  }, []);
+  }, []); // Remove isConnected from dependencies
 
   const diseaseColors = {
     'Diabetes': 'hsl(210, 70%, 30%)',
@@ -120,22 +150,41 @@ export default function LiveDashboard() {
   }
 
   return (
-    <section id="live-dashboard" className="py-20 bg-gradient-to-br from-wellness-mint/5 via-white to-soft-teal/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="live-dashboard" className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50/50 relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-15">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50/20 via-white to-gray-50/10"></div>
+        {/* Subtle dot pattern */}
+        <div className="absolute inset-0" 
+             style={{
+               backgroundImage: `radial-gradient(circle at 1px 1px, rgba(156, 163, 175, 0.06) 1px, transparent 0)`,
+               backgroundSize: '35px 35px'
+             }}>
+        </div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="flex items-center justify-between mb-12 slide-up">
           <div>
-            <h2 className="text-5xl font-bold text-gradient-primary mb-4">Real-Time AI Dashboard</h2>
-            <p className="text-xl text-gray-600 leading-relaxed">Live monitoring of blood disease classification system</p>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Live Health Dashboard</h2>
+            <p className="text-xl text-gray-600 leading-relaxed">Real-time monitoring for better patient care</p>
           </div>
-          <div className="flex items-center space-x-3 bg-white/80 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg">
-            <div className={`w-4 h-4 rounded-full ${isConnected ? 'bg-green-500 pulse-ring' : 'bg-red-500'}`}></div>
-            <span className="text-sm font-medium text-gray-700">
-              {isConnected ? 'Connected' : 'Disconnected'}
-            </span>
-            <Badge variant="outline" className="ml-2 bg-green-50 text-green-700 border-green-200">
-              <Activity className="w-3 h-3 mr-1" />
-              Live
-            </Badge>
+          <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-3 bg-white/90 backdrop-blur-sm rounded-2xl px-6 py-4 shadow-lg border border-emerald-100">
+              <div className={`w-4 h-4 rounded-full ${isConnected ? 'bg-emerald-500 pulse-ring' : 'bg-orange-500'}`}></div>
+              <span className="text-sm font-medium text-gray-700">
+                {isConnected ? 'Connected' : 'Connecting...'}
+              </span>
+              <Badge variant="outline" className="ml-2 bg-emerald-50 text-emerald-700 border-emerald-200">
+                <Activity className="w-3 h-3 mr-1" />
+                Live
+              </Badge>
+            </div>
+            {lastUpdate && (
+              <div className="text-sm text-gray-500">
+                Last updated: {format(lastUpdate, 'HH:mm:ss')}
+              </div>
+            )}
           </div>
         </div>
 
@@ -200,7 +249,7 @@ export default function LiveDashboard() {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Active Cases</p>
-                  <p className="text-4xl font-bold text-gray-900 mb-1">{Object.values(liveMetrics.diseaseStats).reduce((sum, count) => sum + count, 0)}</p>
+                  <p className="text-4xl font-bold text-gray-900 mb-1">{liveMetrics.activeCases || Object.values(liveMetrics.diseaseStats).reduce((sum, count) => sum + count, 0)}</p>
                   <p className="text-sm text-purple-600 flex items-center">
                     <Users className="w-3 h-3 mr-1" />
                     Real-time

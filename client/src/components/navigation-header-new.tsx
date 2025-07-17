@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Brain, Github, Menu, X, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
-import Logo from "./logo";
 
 export default function NavigationHeader() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -20,17 +19,31 @@ export default function NavigationHeader() {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="fixed top-0 w-full bg-white/90 backdrop-blur-xl shadow-lg border-b border-emerald-200/30 z-50"
+      className="fixed top-0 w-full bg-white/80 backdrop-blur-xl shadow-lg border-b border-gray-200/50 z-50"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <motion.div 
-            className="flex items-center"
-            whileHover={{ scale: 1.02 }}
+            className="flex items-center space-x-4"
+            whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           >
-            <Logo size="md" variant="gradient" animated={true} />
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl blur-lg opacity-70"></div>
+              <div className="relative w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+                <Brain className="text-white w-7 h-7" />
+              </div>
+            </div>
+            <div>
+              <h1 className="text-2xl font-black bg-gradient-to-r from-gray-900 to-gray-600 bg-clip-text text-transparent">
+                CodeNomads
+              </h1>
+              <div className="flex items-center space-x-2">
+                <p className="text-sm font-medium text-gray-600">IndabaX South Sudan 2025</p>
+                <Sparkles className="w-3 h-3 text-yellow-500" />
+              </div>
+            </div>
           </motion.div>
           
           {/* Desktop Navigation */}
@@ -44,10 +57,10 @@ export default function NavigationHeader() {
               >
                 <a 
                   href={item.href} 
-                  className="relative px-4 py-2 text-gray-700 hover:text-emerald-600 font-medium transition-all duration-300 group force-text-dark"
+                  className="relative px-4 py-2 text-gray-700 hover:text-blue-600 font-medium transition-all duration-300 group"
                 >
                   {item.label}
-                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-emerald-600 to-teal-600 group-hover:w-full transition-all duration-300"></span>
+                  <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-600 to-purple-600 group-hover:w-full transition-all duration-300"></span>
                 </a>
               </motion.div>
             ))}

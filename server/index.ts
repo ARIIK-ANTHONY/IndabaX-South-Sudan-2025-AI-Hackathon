@@ -1,6 +1,8 @@
 import express, { type Request, Response, NextFunction } from "express";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
+import { setupDatabase } from "./setup-db";
+import dotenv from "dotenv";
 
 const app = express();
 app.use(express.json());
@@ -37,6 +39,25 @@ app.use((req, res, next) => {
 });
 
 (async () => {
+  // Load environment variables from .env file if it exists
+  dotenv.config();
+  
+  // Setup database tables only in production mode
+  if (process.env.NODE_ENV === 'production') {
+    if (process.env.DATABASE_URL) {
+      try {
+        await setupDatabase();
+        log('Database setup complete');
+      } catch (error) {
+        log('Error setting up database:', String(error));
+      }
+    } else {
+      log('No DATABASE_URL provided in production mode');
+    }
+  } else {
+    log('Running in development mode, using in-memory storage');
+  }
+  
   const server = await registerRoutes(app);
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
@@ -61,11 +82,7 @@ app.use((req, res, next) => {
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
   const port = parseInt(process.env.PORT || '5000', 10);
-  server.listen({
-    port,
-    host: "0.0.0.0",
-    reusePort: true,
-  }, () => {
+  server.listen(port, () => {
     log(`serving on port ${port}`);
   });
 })();

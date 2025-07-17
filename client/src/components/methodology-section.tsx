@@ -6,9 +6,9 @@ export default function MethodologySection() {
     {
       number: 1,
       title: "Data Analysis",
-      color: "bg-blue-600",
-      gradient: "bg-gradient-to-br from-blue-600 to-blue-700",
-      borderColor: "border-blue-200",
+      color: "bg-emerald-600",
+      gradient: "bg-gradient-to-br from-emerald-600 to-teal-700",
+      borderColor: "border-emerald-200",
       items: [
         "24 medical features EDA",
         "Class distribution analysis", 
@@ -18,9 +18,9 @@ export default function MethodologySection() {
     {
       number: 2,
       title: "Feature Engineering", 
-      color: "bg-emerald-600",
-      gradient: "bg-gradient-to-br from-emerald-600 to-emerald-700",
-      borderColor: "border-emerald-200",
+      color: "bg-teal-600",
+      gradient: "bg-gradient-to-br from-teal-600 to-cyan-700",
+      borderColor: "border-teal-200",
       items: [
         "13 medical domain features",
         "Blood ratio calculations",
@@ -30,9 +30,9 @@ export default function MethodologySection() {
     {
       number: 3,
       title: "Model Training",
-      color: "bg-purple-600",
-      gradient: "bg-gradient-to-br from-purple-600 to-purple-700",
-      borderColor: "border-purple-200",
+      color: "bg-cyan-600",
+      gradient: "bg-gradient-to-br from-cyan-600 to-emerald-700",
+      borderColor: "border-cyan-200",
       items: [
         "Ensemble learning approach",
         "Hyperparameter optimization",
@@ -42,9 +42,9 @@ export default function MethodologySection() {
     {
       number: 4,
       title: "Optimization",
-      color: "bg-amber-600",
-      gradient: "bg-gradient-to-br from-amber-600 to-amber-700", 
-      borderColor: "border-amber-200",
+      color: "bg-green-600",
+      gradient: "bg-gradient-to-br from-green-600 to-emerald-700", 
+      borderColor: "border-green-200",
       items: [
         "Distribution matching",
         "Confidence-based assignment",
@@ -54,16 +54,20 @@ export default function MethodologySection() {
   ];
 
   return (
-    <section id="methodology" className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="methodology" className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50/50 relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-15">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50/20 via-white to-gray-50/10"></div>
+      </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Technical Methodology</h2>
-          <p className="text-xl text-gray-800">
-            Four-phase approach combining domain expertise with advanced machine learning
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Methodology</h2>
+          <p className="text-xl text-gray-600">
+            A comprehensive approach to blood disease detection using ensemble learning
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
           {phases.map((phase) => (
             <Card key={phase.number} className={`shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 border-2 ${phase.borderColor} bg-white hover:bg-gray-50`}>
               <CardContent className="p-8">

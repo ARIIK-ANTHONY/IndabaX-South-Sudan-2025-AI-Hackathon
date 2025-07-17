@@ -44,9 +44,111 @@
   --sudan-black: hsl(0, 0%, 0%);
   
   /* Gradient Combinations */
+  /* Human-centered, warm gradients */
   --gradient-primary: linear-gradient(135deg, hsl(210, 70%, 30%) 0%, hsl(180, 60%, 45%) 100%);
-  --gradient-healing: linear-gradient(135deg, hsl(150, 60%, 45%) 0%, hsl(180, 75%, 40%) 100%);
-  --gradient-sudan: linear-gradient(135deg, hsl(217, 91%, 60%) 0%, hsl(150, 60%, 45%) 100%);
+  --gradient-healing: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
+  --gradient-sudan: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #1e40af 100%);
+}
+
+/* Modern Animations */
+@keyframes gradient-x {
+  0%, 100% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.33);
+  }
+  40%, 50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 15s ease infinite;
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.pulse-ring {
+  position: relative;
+}
+
+.pulse-ring::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: inherit;
+  animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
 }
 
 .dark {
@@ -78,8 +180,53 @@
   }
 
   body {
-    @apply font-sans antialiased bg-background text-foreground;
+    @apply font-sans antialiased;
+    background-color: white !important;
+    color: #1a202c !important;
+    background: var(--background, white);
+    color: var(--foreground, #1a202c);
   }
+}
+
+/* Force text visibility globally */
+.force-visible {
+  color: #1a202c !important;
+  background-color: white !important;
+}
+
+.force-text-dark {
+  color: #1a202c !important;
+}
+
+/* Force all text elements to be visible except buttons with dark backgrounds */
+h1, h2, h3, h4, h5, h6, p, span, div, a {
+  color: #1a202c !important;
+}
+
+/* Allow buttons to have custom text colors for proper contrast */
+button {
+  color: inherit;
+}
+
+/* Ensure dark background buttons have white text */
+.bg-blue-600, .bg-blue-700, .bg-gray-900, .bg-gray-800 {
+  color: white !important;
+}
+
+.bg-blue-600 *, .bg-blue-700 *, .bg-gray-900 *, .bg-gray-800 * {
+  color: white !important;
+}
+
+/* Override any potential transparent text */
+.text-transparent {
+  color: #1a202c !important;
+}
+
+/* Make sure gradients don't hide text */
+.bg-clip-text {
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  color: #1a202c !important;
 }
 
 @layer utilities {
@@ -279,6 +426,72 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+  
+  /* Organic, natural animations */
+  @keyframes gentleFloat {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes organicPulse {
+    0%, 100% {
+      opacity: 0.8;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(1.05);
+    }
+  }
+  
+  @keyframes softGlow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+    }
+  }
+  
+  .gentle-float {
+    animation: gentleFloat 3s ease-in-out infinite;
+  }
+  
+  .organic-pulse {
+    animation: organicPulse 2s ease-in-out infinite;
+  }
+  
+  .soft-glow {
+    animation: softGlow 2s ease-in-out infinite;
+  }
+  
+  /* Natural gradient backgrounds */
+  .natural-gradient {
+    background: linear-gradient(135deg, 
+      rgba(16, 185, 129, 0.1) 0%, 
+      rgba(20, 184, 166, 0.1) 25%, 
+      rgba(34, 197, 94, 0.1) 50%, 
+      rgba(16, 185, 129, 0.1) 75%, 
+      rgba(20, 184, 166, 0.1) 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+  }
+  
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
     }
   }
 }

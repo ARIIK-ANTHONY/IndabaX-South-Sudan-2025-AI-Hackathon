@@ -1,7 +1,7 @@
 export const TEAM_MEMBERS = [
   {
     name: "ARIIK ANTHONY MATHIANG",
-    role: "Lead AI Engineer",
+    role: "ML Engineer",
     description: "Solution architect specializing in medical domain feature engineering and ensemble model implementation.",
     avatar: "A"
   },
@@ -53,7 +53,7 @@ export const PROJECT_STATS = {
   targetAccuracy: 98.55,
   medicalParameters: 24,
   diseaseTypes: 6,
-  trainingSamples: 2351,
-  testSamples: 486,
+  trainingSamples: 0, // Will be updated dynamically
+  testSamples: 0, // Will be updated dynamically
   engineeredFeatures: 13
 };

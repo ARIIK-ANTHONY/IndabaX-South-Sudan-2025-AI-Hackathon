@@ -37,10 +37,14 @@ export default function DemoSection() {
 
   const predictMutation = useMutation({
     mutationFn: async (data: PredictionForm) => {
+      console.log("Sending prediction data:", data);
       const response = await apiRequest("POST", "/api/predictions", data);
-      return response.json();
+      const result = await response.json();
+      console.log("Prediction result:", result);
+      return result;
     },
     onSuccess: (data) => {
+      console.log("Prediction successful:", data);
       setResult({
         prediction: data.prediction,
         confidence: data.confidence,
@@ -48,37 +52,78 @@ export default function DemoSection() {
       queryClient.invalidateQueries({ queryKey: ["/api/predictions"] });
       toast({
         title: "Prediction Complete",
-        description: "Blood disease classification has been generated.",
+        description: `Predicted: ${data.prediction} (${(data.confidence * 100).toFixed(1)}% confidence)`,
       });
     },
-    onError: () => {
+    onError: (error) => {
+      console.error("Prediction error:", error);
       toast({
         title: "Prediction Failed",
-        description: "Please check your input values and try again.",
+        description: `Error: ${error.message || "Please check your input values and try again."}`,
         variant: "destructive",
       });
     },
   });
 
   const handleInputChange = (field: keyof PredictionForm) => (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    const numValue = value === "" ? 0 : parseFloat(value);
+    
+    console.log(`Setting ${field} to:`, numValue);
+    
     setFormData(prev => ({
       ...prev,
-      [field]: parseFloat(e.target.value) || 0
+      [field]: isNaN(numValue) ? 0 : numValue
     }));
   };
 
   const handlePredict = () => {
     // Validate inputs
     const values = Object.values(formData);
-    if (values.some(v => v <= 0)) {
+    const fields = Object.keys(formData);
+    
+    // Check for empty or invalid values
+    const invalidFields = fields.filter((field, index) => {
+      const value = values[index];
+      return value === null || value === undefined || value <= 0 || isNaN(value);
+    });
+    
+    if (invalidFields.length > 0) {
+      console.log("Invalid fields:", invalidFields, "Current data:", formData);
       toast({
         title: "Invalid Input",
-        description: "Please enter valid positive values for all medical parameters.",
+        description: `Please enter valid positive values for: ${invalidFields.join(", ")}`,
         variant: "destructive",
       });
       return;
     }
 
+    // Additional validation for reasonable medical ranges
+    const validationRules = [
+      { field: "glucose", min: 50, max: 400, name: "Glucose" },
+      { field: "hemoglobin", min: 5, max: 20, name: "Hemoglobin" },
+      { field: "platelets", min: 50, max: 1000, name: "Platelets" },
+      { field: "cholesterol", min: 100, max: 400, name: "Cholesterol" },
+      { field: "whiteBloodCells", min: 1, max: 50, name: "White Blood Cells" },
+      { field: "hematocrit", min: 15, max: 60, name: "Hematocrit" }
+    ];
+
+    const outOfRangeFields = validationRules.filter(rule => {
+      const value = formData[rule.field as keyof PredictionForm];
+      return value < rule.min || value > rule.max;
+    });
+
+    if (outOfRangeFields.length > 0) {
+      console.log("Out of range fields:", outOfRangeFields);
+      toast({
+        title: "Values Out of Range",
+        description: `Please check: ${outOfRangeFields.map(f => f.name).join(", ")}`,
+        variant: "destructive",
+      });
+      return;
+    }
+
+    console.log("Validation passed, sending prediction:", formData);
     predictMutation.mutate(formData);
   };
 

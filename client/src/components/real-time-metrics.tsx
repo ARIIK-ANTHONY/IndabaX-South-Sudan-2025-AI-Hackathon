@@ -3,7 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer, BarChart, Bar } from "recharts";
-import { TrendingUp, Activity, Clock, AlertTriangle } from "lucide-react";
+import { TrendingUp, Activity, Clock, AlertTriangle, Zap, Users, Target } from "lucide-react";
+import { motion } from "framer-motion";
 
 interface RealtimeData {
   totalPredictions: number;
@@ -14,25 +15,64 @@ interface RealtimeData {
   timestamp: Date;
 }
 
+interface LiveMetricsData {
+  totalPredictions: number;
+  accuracyRate: number;
+  diseaseBreakdown: string;
+  avgConfidence: number;
+  recentPredictions: any[];
+  timestamp: string | Date;
+}
+
+interface DiseaseDistribution {
+  name: string;
+  value: number;
+  percentage: string;
+}
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      delayChildren: 0.2,
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const itemVariants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      damping: 25,
+      stiffness: 120
+    }
+  }
+};
+
 export default function RealTimeMetrics() {
   const [metrics, setMetrics] = useState<RealtimeData[]>([]);
 
   // Fetch live metrics every 3 seconds
-  const { data: currentMetrics, isLoading } = useQuery({
+  const { data: currentMetrics, isLoading } = useQuery<LiveMetricsData>({
     queryKey: ["/api/live-metrics"],
     refetchInterval: 3000,
     refetchIntervalInBackground: true,
   });
 
   // Fetch recent predictions
-  const { data: recentPredictions } = useQuery({
+  const { data: recentPredictions } = useQuery<any[]>({
     queryKey: ["/api/recent-predictions"],
     refetchInterval: 5000,
     refetchIntervalInBackground: true,
   });
 
   // Fetch disease distribution
-  const { data: diseaseDistribution } = useQuery({
+  const { data: diseaseDistribution } = useQuery<DiseaseDistribution[]>({
     queryKey: ["/api/disease-distribution"],
     refetchInterval: 10000,
     refetchIntervalInBackground: true,
@@ -41,7 +81,11 @@ export default function RealTimeMetrics() {
   useEffect(() => {
     if (currentMetrics) {
       setMetrics(prev => {
-        const newMetrics = [...prev, currentMetrics];
+        const newMetric: RealtimeData = {
+          ...currentMetrics,
+          timestamp: new Date(currentMetrics.timestamp)
+        };
+        const newMetrics = [...prev, newMetric];
         return newMetrics.slice(-20); // Keep last 20 data points
       });
     }
@@ -49,13 +93,13 @@ export default function RealTimeMetrics() {
 
   if (isLoading) {
     return (
-      <section className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <section className="py-16 bg-gradient-to-br from-emerald-50 to-teal-50/50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="animate-pulse">
-            <div className="h-8 bg-gray-200 rounded w-1/3 mb-4"></div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {[1, 2, 3].map(i => (
-                <div key={i} className="h-32 bg-gray-200 rounded"></div>
+            <div className="h-12 bg-gradient-to-r from-emerald-200 to-teal-200 rounded-xl w-1/3 mx-auto"></div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+              {[...Array(3)].map((_, i) => (
+                <div key={i} className="h-48 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-2xl"></div>
               ))}
             </div>
           </div>
@@ -65,81 +109,132 @@ export default function RealTimeMetrics() {
   }
 
   return (
-    <section id="realtime" className="py-16 bg-gradient-to-br from-gray-50 to-blue-50/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between mb-12">
-          <div className="slide-up">
-            <h2 className="text-4xl font-bold text-gradient mb-3">Real-Time Analytics</h2>
-            <p className="text-lg text-gray-600">Live system performance and AI predictions</p>
-          </div>
-          <Badge variant="outline" className="flex items-center gap-2 bg-white/80 backdrop-blur-sm border-green-200 text-green-700 px-4 py-2">
-            <div className="w-3 h-3 bg-green-500 rounded-full pulse-ring"></div>
-            Live Updates
-          </Badge>
+    <section id="realtime" className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50/50 relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute inset-0 bg-gradient-to-br from-gray-50/30 via-white to-gray-50/20"></div>
+        {/* Subtle dot pattern */}
+        <div className="absolute inset-0" 
+             style={{
+               backgroundImage: `radial-gradient(circle at 1px 1px, rgba(156, 163, 175, 0.08) 1px, transparent 0)`,
+               backgroundSize: '30px 30px'
+             }}>
         </div>
-
-        {/* Real-time metrics cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          <Card className="card-hover border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardContent className="p-8">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Total Predictions</p>
-                  <p className="text-4xl font-bold text-gray-900 mb-2">
-                    {currentMetrics?.totalPredictions?.toLocaleString() || 0}
-                  </p>
-                  <p className="text-sm text-green-600 flex items-center">
-                    <TrendingUp className="w-4 h-4 mr-2" />
-                    Active monitoring
-                  </p>
-                </div>
-                <div className="w-16 h-16 bg-gradient-sudan rounded-2xl flex items-center justify-center shadow-lg">
-                  <Activity className="w-8 h-8 text-white" />
-                </div>
+        {/* Soft geometric shapes */}
+        <div className="absolute top-20 left-20 w-24 h-24 bg-gray-200/20 rounded-full blur-xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-20 w-20 h-20 bg-gray-300/15 rounded-full blur-lg animate-pulse" style={{animationDelay: '3s'}}></div>
+      </div>
+      
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <motion.div 
+          className="text-center mb-16"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.div variants={itemVariants} className="mb-6">
+            <Badge 
+              variant="outline" 
+              className="inline-flex items-center gap-2 bg-white/90 backdrop-blur-sm border-emerald-200 text-emerald-700 px-6 py-3 text-sm font-semibold rounded-full"
+            >
+              <div className="relative">
+                <div className="w-3 h-3 bg-emerald-500 rounded-full"></div>
+                <div className="absolute inset-0 w-3 h-3 bg-emerald-500 rounded-full animate-ping"></div>
               </div>
-            </CardContent>
-          </Card>
+              Real-Time Analytics
+            </Badge>
+          </motion.div>
+          
+          <motion.h2 
+            variants={itemVariants}
+            className="text-5xl md:text-6xl font-black mb-6 text-gray-900"
+          >
+            Live System Performance
+          </motion.h2>
+          
+          <motion.p 
+            variants={itemVariants}
+            className="text-xl text-gray-600 max-w-3xl mx-auto"
+          >
+            Monitor AI predictions and system performance in real-time
+          </motion.p>
+        </motion.div>
 
-          <Card className="card-hover border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardContent className="p-8">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Model Accuracy</p>
-                  <p className="text-4xl font-bold text-gray-900 mb-2">
-                    {((currentMetrics?.accuracyRate || 0) * 100).toFixed(2)}%
-                  </p>
-                  <p className="text-sm text-green-600 flex items-center">
-                    <TrendingUp className="w-4 h-4 mr-2" />
-                    Above target
-                  </p>
-                </div>
-                <div className="w-16 h-16 bg-medical-green rounded-2xl flex items-center justify-center shadow-lg">
-                  <TrendingUp className="w-8 h-8 text-white" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="card-hover border-0 shadow-xl bg-white/80 backdrop-blur-sm">
-            <CardContent className="p-8">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-2">Avg Confidence</p>
-                  <p className="text-4xl font-bold text-gray-900 mb-2">
-                    {((currentMetrics?.avgConfidence || 0) * 100).toFixed(1)}%
-                  </p>
-                  <p className="text-sm text-blue-600 flex items-center">
-                    <Clock className="w-4 h-4 mr-2" />
-                    High confidence
-                  </p>
-                </div>
-                <div className="w-16 h-16 bg-gradient-medical rounded-2xl flex items-center justify-center shadow-lg">
-                  <AlertTriangle className="w-8 h-8 text-white" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        {/* Modern metrics cards */}
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {[
+            {
+              title: "Total Predictions",
+              value: currentMetrics?.totalPredictions?.toLocaleString() || 0,
+              subtitle: "Active monitoring",
+              icon: Users,
+              gradient: "from-emerald-400 to-teal-500",
+              bgGradient: "from-emerald-50 to-teal-50"
+            },
+            {
+              title: "Model Accuracy",
+              value: `${((currentMetrics?.accuracyRate || 0) * 100).toFixed(2)}%`,
+              subtitle: "Above target",
+              icon: Target,
+              gradient: "from-teal-500 to-cyan-500",
+              bgGradient: "from-teal-50 to-cyan-50"
+            },
+            {
+              title: "Avg Confidence",
+              value: `${((currentMetrics?.avgConfidence || 0) * 100).toFixed(1)}%`,
+              subtitle: "High precision",
+              icon: Zap,
+              gradient: "from-cyan-500 to-emerald-500",
+              bgGradient: "from-cyan-50 to-emerald-50"
+            }
+          ].map((metric, index) => (
+            <motion.div
+              key={metric.title}
+              variants={itemVariants}
+              whileHover={{ y: -8, scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            >
+              <Card className="group relative overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-500">
+                <div className={`absolute inset-0 bg-gradient-to-br ${metric.bgGradient} opacity-50`}></div>
+                <CardContent className="relative p-8">
+                  <div className="flex items-center justify-between mb-6">
+                    <div>
+                      <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide mb-2">
+                        {metric.title}
+                      </p>
+                      <p className="text-4xl md:text-5xl font-black text-gray-900 mb-2">
+                        {metric.value}
+                      </p>
+                      <div className="flex items-center text-sm text-gray-600">
+                        <TrendingUp className="w-4 h-4 mr-2 text-green-500" />
+                        {metric.subtitle}
+                      </div>
+                    </div>
+                    <div className={`relative p-4 rounded-2xl bg-gradient-to-r ${metric.gradient} shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+                      <metric.icon className="w-8 h-8 text-white" />
+                      <div className="absolute inset-0 rounded-2xl bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                  </div>
+                  
+                  {/* Animated progress bar */}
+                  <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                    <motion.div 
+                      className={`h-full bg-gradient-to-r ${metric.gradient} rounded-full`}
+                      initial={{ width: 0 }}
+                      animate={{ width: "85%" }}
+                      transition={{ delay: index * 0.2, duration: 1, ease: "easeOut" }}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Live performance chart */}
@@ -176,9 +271,9 @@ export default function RealTimeMetrics() {
                     />
                     <Tooltip 
                       labelFormatter={(value) => new Date(value).toLocaleString()}
-                      formatter={(value: number, name: string) => [
+                      formatter={(value: number, name: string, props: any) => [
                         `${(value * 100).toFixed(2)}%`, 
-                        name === 'accuracyRate' ? 'Accuracy' : 'Confidence'
+                        props.dataKey === 'accuracyRate' ? 'Accuracy' : 'Confidence'
                       ]}
                       contentStyle={{
                         backgroundColor: 'rgba(255, 255, 255, 0.95)',
@@ -296,9 +391,9 @@ export default function RealTimeMetrics() {
                       </td>
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="flex-1 bg-gray-200 rounded-full h-2.5">
+                          <div className="flex-1 bg-emerald-100 rounded-full h-2.5">
                             <div 
-                              className="bg-gradient-to-r from-blue-500 to-blue-600 h-2.5 rounded-full transition-all duration-300" 
+                              className="bg-gradient-to-r from-emerald-500 to-teal-500 h-2.5 rounded-full transition-all duration-300" 
                               style={{ width: `${prediction.confidence * 100}%` }}
                             ></div>
                           </div>
