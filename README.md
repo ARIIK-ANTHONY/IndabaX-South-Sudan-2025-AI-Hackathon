@@ -2,7 +2,9 @@
 
 ## Team: CodeNomads
 **Member**: ARIIK ANTHONY MATHIANG
+
 **Member**: JONGKUCH CHOL ANYAR
+
 **Member**: JOK JOHN MAKER
 
 
