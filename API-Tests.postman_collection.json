@@ -1,0 +1,36 @@
+{
+  "info": {
+    "name": "Blood Disease Classification API",
+    "description": "Complete API test collection for IndabaX South Sudan 2025 Hackathon",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "http://localhost:5000/api", "type": "string" },
+    { "key": "sessionId", "value": "", "type": "string" }
+  ],
+  "item": [
+    { "name": "Health Check", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/health", "host": ["{{baseUrl}}"], "path": ["health"] } }, "response": [] },
+    { "name": "Make Prediction", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"glucose\": 120,\n  \"hemoglobin\": 14.5,\n  \"platelets\": 250000,\n  \"cholesterol\": 180,\n  \"whiteBloodCells\": 7000,\n  \"hematocrit\": 42\n}" }, "url": { "raw": "{{baseUrl}}/predict", "host": ["{{baseUrl}}"], "path": ["predict"] } }, "response": [] },
+    { "name": "Create Prediction (Internal)", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"glucose\": 120,\n  \"hemoglobin\": 14.5,\n  \"platelets\": 250000,\n  \"cholesterol\": 180,\n  \"whiteBloodCells\": 7000,\n  \"hematocrit\": 42\n}" }, "url": { "raw": "{{baseUrl}}/predictions", "host": ["{{baseUrl}}"], "path": ["predictions"] } }, "response": [] },
+    { "name": "Get All Predictions", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/predictions", "host": ["{{baseUrl}}"], "path": ["predictions"] } }, "response": [] },
+    { "name": "Get Recent Predictions", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/recent-predictions?limit=10&offset=0", "host": ["{{baseUrl}}"], "path": ["recent-predictions"], "query": [{ "key": "limit", "value": "10" }, { "key": "offset", "value": "0" }] } }, "response": [] },
+    { "name": "Get Live Metrics", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/live-metrics", "host": ["{{baseUrl}}"], "path": ["live-metrics"] } }, "response": [] },
+    { "name": "Get Disease Distribution", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/disease-distribution", "host": ["{{baseUrl}}"], "path": ["disease-distribution"] } }, "response": [] },
+    { "name": "Get Statistics", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/stats", "host": ["{{baseUrl}}"], "path": ["stats"] } }, "response": [] },
+    { "name": "Get All Diseases", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/diseases", "host": ["{{baseUrl}}"], "path": ["diseases"] } }, "response": [] },
+    { "name": "Get Disease Details (Parameterized)", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/disease/{{diseaseName}}", "host": ["{{baseUrl}}"], "path": ["disease", "{{diseaseName}}"] } }, "response": [] },
+    { "name": "Get Disease Symptoms (Parameterized)", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/disease/{{diseaseName}}/symptoms", "host": ["{{baseUrl}}"], "path": ["disease", "{{diseaseName}}", "symptoms"] } }, "response": [] },
+    { "name": "Get Disease Treatment (Parameterized)", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/disease/{{diseaseName}}/treatment", "host": ["{{baseUrl}}"], "path": ["disease", "{{diseaseName}}", "treatment"] } }, "response": [] },
+    { "name": "Get Disease Causes (Parameterized)", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/disease/{{diseaseName}}/causes", "host": ["{{baseUrl}}"], "path": ["disease", "{{diseaseName}}", "causes"] } }, "response": [] },
+    { "name": "Get Disease Prevention (Parameterized)", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/disease/{{diseaseName}}/prevention", "host": ["{{baseUrl}}"], "path": ["disease", "{{diseaseName}}", "prevention"] } }, "response": [] },
+    { "name": "Get Chat Session (Parameterized)", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/chatbot/session/{{sessionId}}", "host": ["{{baseUrl}}"], "path": ["chatbot", "session", "{{sessionId}}"] } }, "response": [] },
+    { "name": "Create Chat Session", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{}" }, "url": { "raw": "{{baseUrl}}/chatbot/session", "host": ["{{baseUrl}}"], "path": ["chatbot", "session"] } }, "response": [] },
+    { "name": "Get Chat Session", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/chatbot/session/{{sessionId}}", "host": ["{{baseUrl}}"], "path": ["chatbot", "session", "{{sessionId}}"] } }, "response": [] },
+    { "name": "Send Chat Message", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"sessionId\": \"{{sessionId}}\",\n  \"message\": \"What are the symptoms of diabetes?\"\n}" }, "url": { "raw": "{{baseUrl}}/chatbot/message", "host": ["{{baseUrl}}"], "path": ["chatbot", "message"] } }, "response": [] },
+    { "name": "Get Chat History", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/chatbot/history?sessionId={{sessionId}}", "host": ["{{baseUrl}}"], "path": ["chatbot", "history"], "query": [{ "key": "sessionId", "value": "{{sessionId}}" }] } }, "response": [] },
+    { "name": "Get Training Stats", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/training/stats", "host": ["{{baseUrl}}"], "path": ["training", "stats"] } }, "response": [] },
+    { "name": "Get Training Demo", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/training/demo", "host": ["{{baseUrl}}"], "path": ["training", "demo"] } }, "response": [] },
+    { "name": "Run Training Test", "request": { "method": "POST", "header": [{ "key": "Content-Type", "value": "application/json" }], "body": { "mode": "raw", "raw": "{\n  \"testInputs\": [\"What causes diabetes?\", \"How is anemia treated?\"]\n}" }, "url": { "raw": "{{baseUrl}}/training/test", "host": ["{{baseUrl}}"], "path": ["training", "test"] } }, "response": [] },
+    { "name": "Validate Training Data", "request": { "method": "GET", "header": [], "url": { "raw": "{{baseUrl}}/training/validate", "host": ["{{baseUrl}}"], "path": ["training", "validate"] } }, "response": [] }
+  ]
+}

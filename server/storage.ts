@@ -73,6 +73,10 @@ export class DbStorage implements IStorage {
     return await db.select().from(predictions);
   }
 
+  async getPredictionsPaginated(limit: number = 50, offset: number = 0): Promise<Prediction[]> {
+    return await db.select().from(predictions).orderBy(desc(predictions.createdAt)).limit(limit).offset(offset);
+  }
+
   async getRecentPredictions(limit: number = 10): Promise<Prediction[]> {
     return await db.select().from(predictions).orderBy(desc(predictions.createdAt)).limit(limit);
   }
@@ -88,13 +92,15 @@ export class DbStorage implements IStorage {
   }
 
   async getDiseaseStats(): Promise<{ [key: string]: number }> {
-    const allPredictions = await this.getAllPredictions();
+    // Use aggregation to avoid loading all predictions
+    const result: Array<{ prediction: string; count: number }> = await db
+      .select({ prediction: predictions.prediction, count: db.raw('COUNT(*)') })
+      .from(predictions)
+      .groupBy(predictions.prediction);
     const stats: { [key: string]: number } = {};
-    
-    allPredictions.forEach(prediction => {
-      stats[prediction.prediction] = (stats[prediction.prediction] || 0) + 1;
+    result.forEach((row) => {
+      stats[row.prediction] = Number(row.count);
     });
-    
     return stats;
   }
 

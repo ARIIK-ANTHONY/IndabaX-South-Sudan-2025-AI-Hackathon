@@ -10,7 +10,11 @@ if (process.env.NODE_ENV === 'production') {
   // Check if DATABASE_URL is defined in production
   if (!process.env.DATABASE_URL) {
     console.warn('DATABASE_URL environment variable is not defined in production. Using mock database for demo purposes.');
-    db = { query: async () => ({}) };
+    db = {
+      execute: async () => ({}),
+      select: () => ({ from: () => [] }),
+      insert: () => ({ values: () => ({}) })
+    };
   } else {
     // Create a postgres-js client with SSL required for cloud databases
     const client = postgres(process.env.DATABASE_URL!, { ssl: 'require' });

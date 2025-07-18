@@ -111,9 +111,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Paginated predictions endpoint
   app.get("/api/predictions", async (req, res) => {
     try {
-      const predictions = await storage.getAllPredictions();
+      const limit = parseInt(req.query.limit as string) || 50;
+      const offset = parseInt(req.query.offset as string) || 0;
+      const predictions = await storage.getPredictionsPaginated(limit, offset);
       res.json(predictions);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch predictions" });
