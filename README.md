@@ -41,15 +41,25 @@ Blood Disease Classification AI is a comprehensive full-stack web application th
 
 
 ### Dashboard Overview
-![Dashboard Metrics](client/public/image-1752814015802.png)
+
+<div align="center">
+  <img src="client/public/image-1752814015802.png" alt="Dashboard Metrics" width="48%" style="display:inline-block; margin-right:1%;"/>
+  <img src="client/public/image-1752814115035.png" alt="Live Disease Distribution" width="48%" style="display:inline-block;"/>
+</div>
 *Real-time metrics and disease distribution analytics*
 
 ### AI-Powered Predictions
-![Predictions](client/public/image-1752814446581.png)
+<div align="center">
+  <img src="client/public/image-1752814446581.png" alt="Predictions" width="48%" style="display:inline-block; margin-right:1%;"/>
+  <img src="client/public/image-1752814493811.png" alt="Predictions 2" width="48%" style="display:inline-block;"/>
+</div>
 *Instant blood disease classification with confidence scores*
 
 ### AI Chatbot Interface
-![Chatbot](client/public/image-1752814493811.png)
+<div align="center">
+  <img src="client/public/image-1752814769438.png" alt="Chatbot 1" width="48%" style="display:inline-block; margin-right:1%;"/>
+  <img src="client/public/image-1752814796578.png" alt="Chatbot 2" width="48%" style="display:inline-block;"/>
+</div>
 *Interactive medical consultation system*
 
 ### Additional Screenshots
