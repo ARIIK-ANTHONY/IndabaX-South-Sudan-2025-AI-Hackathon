@@ -11,7 +11,7 @@
 ** IndabaX South Sudan 2025 Hackathon Submission**  
 **An advanced AI-powered web application for automated blood disease diagnosis and prediction**
 
-[ Live Demo](https://your-deployment-url.com) • [Features](#features) • [Installation](#installation) • [API Docs](#api-documentation) • [AI Chatbot](./CHATBOT.md) • [Database](./DATABASE.md) • [Team](#team-codenomads)
+[ Live Demo](https://codenomads.onrender.com/) • [Features](#features) • [Installation](#installation) • [API Docs](#api-documentation) • [AI Chatbot](./CHATBOT.md) • [Database](./DATABASE.md) • [Team](#team-codenomads)
 
 </div>
 
@@ -69,7 +69,7 @@ npm run db:setup
 npm run dev
 ```
 
-Visit `http://localhost:5000` to see the application in action!
+Visit [`https://codenomads.onrender.com/`](https://codenomads.onrender.com/) to see the application live!
 
 ---
 
