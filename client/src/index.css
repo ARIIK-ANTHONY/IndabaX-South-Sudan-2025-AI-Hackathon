@@ -1,0 +1,497 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: hsl(0, 0%, 100%);
+  --foreground: hsl(210, 20%, 15%);
+  --muted: hsl(210, 40%, 96%);
+  --muted-foreground: hsl(210, 10%, 50%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(210, 20%, 15%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(210, 20%, 15%);
+  --border: hsl(210, 30%, 88%);
+  --input: hsl(210, 30%, 92%);
+  --primary: hsl(210, 70%, 30%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(180, 25%, 85%);
+  --secondary-foreground: hsl(210, 20%, 15%);
+  --accent: hsl(150, 60%, 45%);
+  --accent-foreground: hsl(0, 0%, 100%);
+  --destructive: hsl(0, 70%, 55%);
+  --destructive-foreground: hsl(0, 0%, 100%);
+  --ring: hsl(210, 70%, 30%);
+  --radius: 0.5rem;
+  
+  /* Professional Healthcare Colors */
+  --medical-primary: hsl(210, 70%, 30%);
+  --medical-secondary: hsl(180, 60%, 45%);
+  --healing-green: hsl(150, 60%, 45%);
+  --trust-blue: hsl(217, 70%, 35%);
+  --calm-teal: hsl(180, 75%, 40%);
+  --soft-teal: hsl(180, 40%, 75%);
+  --wellness-mint: hsl(150, 40%, 80%);
+  --alert-orange: hsl(35, 85%, 60%);
+  --success-green: hsl(150, 70%, 40%);
+  --warning-amber: hsl(45, 90%, 55%);
+  --info-cyan: hsl(190, 80%, 50%);
+  
+  /* South Sudan Heritage Colors */
+  --sudan-blue: hsl(217, 91%, 60%);
+  --sudan-yellow: hsl(45, 100%, 58%);
+  --sudan-red: hsl(0, 73%, 49%);
+  --sudan-black: hsl(0, 0%, 0%);
+  
+  /* Gradient Combinations */
+  /* Human-centered, natural gradients */
+  --gradient-primary: linear-gradient(145deg, #2563eb 0%, #1d4ed8 100%);
+  --gradient-healing: linear-gradient(145deg, #16a34a 0%, #15803d 100%);
+  --gradient-sudan: linear-gradient(145deg, #3b82f6 0%, #2563eb 100%);
+}
+
+/* Modern Animations */
+@keyframes gradient-x {
+  0%, 100% {
+    transform: translateX(0%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.33);
+  }
+  40%, 50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 15s ease infinite;
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.pulse-ring {
+  position: relative;
+}
+
+.pulse-ring::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: inherit;
+  animation: pulse-ring 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+.dark {
+  --background: hsl(210, 25%, 8%);
+  --foreground: hsl(0, 0%, 95%);
+  --muted: hsl(210, 20%, 15%);
+  --muted-foreground: hsl(210, 10%, 65%);
+  --popover: hsl(210, 25%, 8%);
+  --popover-foreground: hsl(0, 0%, 95%);
+  --card: hsl(210, 20%, 12%);
+  --card-foreground: hsl(0, 0%, 95%);
+  --border: hsl(210, 20%, 20%);
+  --input: hsl(210, 20%, 18%);
+  --primary: hsl(180, 60%, 45%);
+  --primary-foreground: hsl(210, 25%, 8%);
+  --secondary: hsl(210, 20%, 18%);
+  --secondary-foreground: hsl(0, 0%, 95%);
+  --accent: hsl(150, 50%, 50%);
+  --accent-foreground: hsl(210, 25%, 8%);
+  --destructive: hsl(0, 60%, 50%);
+  --destructive-foreground: hsl(0, 0%, 95%);
+  --ring: hsl(180, 60%, 45%);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased;
+    background-color: white !important;
+    color: #1a202c !important;
+    background: var(--background, white);
+    color: var(--foreground, #1a202c);
+  }
+}
+
+/* Force text visibility globally */
+.force-visible {
+  color: #1a202c !important;
+  background-color: white !important;
+}
+
+.force-text-dark {
+  color: #1a202c !important;
+}
+
+/* Force all text elements to be visible except buttons with dark backgrounds */
+h1, h2, h3, h4, h5, h6, p, span, div, a {
+  color: #1a202c !important;
+}
+
+/* Allow buttons to have custom text colors for proper contrast */
+button {
+  color: inherit;
+}
+
+/* Ensure dark background buttons have white text */
+.bg-blue-600, .bg-blue-700, .bg-gray-900, .bg-gray-800 {
+  color: white !important;
+}
+
+.bg-blue-600 *, .bg-blue-700 *, .bg-gray-900 *, .bg-gray-800 * {
+  color: white !important;
+}
+
+/* Override any potential transparent text */
+.text-transparent {
+  color: #1a202c !important;
+}
+
+/* Make sure gradients don't hide text */
+.bg-clip-text {
+  -webkit-background-clip: unset !important;
+  background-clip: unset !important;
+  color: #1a202c !important;
+}
+
+@layer utilities {
+  /* Healthcare Primary Colors */
+  .medical-primary {
+    color: hsl(210, 70%, 30%);
+  }
+  
+  .bg-medical-primary {
+    background-color: hsl(210, 70%, 30%);
+  }
+  
+  .medical-secondary {
+    color: hsl(180, 60%, 45%);
+  }
+  
+  .bg-medical-secondary {
+    background-color: hsl(180, 60%, 45%);
+  }
+  
+  .healing-green {
+    color: hsl(150, 60%, 45%);
+  }
+  
+  .bg-healing-green {
+    background-color: hsl(150, 60%, 45%);
+  }
+  
+  .trust-blue {
+    color: hsl(217, 70%, 35%);
+  }
+  
+  .bg-trust-blue {
+    background-color: hsl(217, 70%, 35%);
+  }
+  
+  .calm-teal {
+    color: hsl(180, 75%, 40%);
+  }
+  
+  .bg-calm-teal {
+    background-color: hsl(180, 75%, 40%);
+  }
+  
+  .soft-teal {
+    color: hsl(180, 40%, 75%);
+  }
+  
+  .bg-soft-teal {
+    background-color: hsl(180, 40%, 75%);
+  }
+  
+  .wellness-mint {
+    color: hsl(150, 40%, 80%);
+  }
+  
+  .bg-wellness-mint {
+    background-color: hsl(150, 40%, 80%);
+  }
+  
+  /* Status Colors */
+  .success-green {
+    color: hsl(150, 70%, 40%);
+  }
+  
+  .bg-success-green {
+    background-color: hsl(150, 70%, 40%);
+  }
+  
+  .warning-amber {
+    color: hsl(45, 90%, 55%);
+  }
+  
+  .bg-warning-amber {
+    background-color: hsl(45, 90%, 55%);
+  }
+  
+  .alert-orange {
+    color: hsl(35, 85%, 60%);
+  }
+  
+  .bg-alert-orange {
+    background-color: hsl(35, 85%, 60%);
+  }
+  
+  .info-cyan {
+    color: hsl(190, 80%, 50%);
+  }
+  
+  .bg-info-cyan {
+    background-color: hsl(190, 80%, 50%);
+  }
+  
+  /* South Sudan Heritage Colors */
+  .sudan-blue {
+    color: hsl(217, 91%, 60%);
+  }
+  
+  .bg-sudan-blue {
+    background-color: hsl(217, 91%, 60%);
+  }
+  
+  .sudan-yellow {
+    color: hsl(45, 100%, 58%);
+  }
+  
+  .bg-sudan-yellow {
+    background-color: hsl(45, 100%, 58%);
+  }
+  
+  .sudan-red {
+    color: hsl(0, 73%, 49%);
+  }
+  
+  .bg-sudan-red {
+    background-color: hsl(0, 73%, 49%);
+  }
+  
+  /* Professional Gradients */
+  .bg-gradient-primary {
+    background: var(--gradient-primary);
+  }
+  
+  .bg-gradient-healing {
+    background: var(--gradient-healing);
+  }
+  
+  .bg-gradient-sudan {
+    background: var(--gradient-sudan);
+  }
+  
+  .text-gradient-primary {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-gradient-healing {
+    background: var(--gradient-healing);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .text-gradient-sudan {
+    background: var(--gradient-sudan);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .card-hover {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .card-hover:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  .pulse-ring {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+  
+  .fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+  }
+  
+  .slide-up {
+    animation: slideUp 0.8s ease-out;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Organic, natural animations */
+  @keyframes gentleFloat {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+  
+  @keyframes organicPulse {
+    0%, 100% {
+      opacity: 0.8;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.4;
+      transform: scale(1.05);
+    }
+  }
+  
+  @keyframes softGlow {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px rgba(16, 185, 129, 0.6);
+    }
+  }
+  
+  .gentle-float {
+    animation: gentleFloat 3s ease-in-out infinite;
+  }
+  
+  .organic-pulse {
+    animation: organicPulse 2s ease-in-out infinite;
+  }
+  
+  .soft-glow {
+    animation: softGlow 2s ease-in-out infinite;
+  }
+  
+  /* Natural gradient backgrounds */
+  .natural-gradient {
+    background: linear-gradient(135deg, 
+      rgba(16, 185, 129, 0.1) 0%, 
+      rgba(20, 184, 166, 0.1) 25%, 
+      rgba(34, 197, 94, 0.1) 50%, 
+      rgba(16, 185, 129, 0.1) 75%, 
+      rgba(20, 184, 166, 0.1) 100%);
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+  }
+  
+  @keyframes gradientShift {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
