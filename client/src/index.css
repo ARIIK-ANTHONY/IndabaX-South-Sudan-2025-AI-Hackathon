@@ -44,10 +44,10 @@
   --sudan-black: hsl(0, 0%, 0%);
   
   /* Gradient Combinations */
-  /* Human-centered, warm gradients */
-  --gradient-primary: linear-gradient(135deg, hsl(210, 70%, 30%) 0%, hsl(180, 60%, 45%) 100%);
-  --gradient-healing: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%);
-  --gradient-sudan: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 50%, #1e40af 100%);
+  /* Human-centered, natural gradients */
+  --gradient-primary: linear-gradient(145deg, #2563eb 0%, #1d4ed8 100%);
+  --gradient-healing: linear-gradient(145deg, #16a34a 0%, #15803d 100%);
+  --gradient-sudan: linear-gradient(145deg, #3b82f6 0%, #2563eb 100%);
 }
 
 /* Modern Animations */

@@ -233,7 +233,7 @@ export default function DemoSection() {
               <Button
                 onClick={handlePredict}
                 disabled={predictMutation.isPending}
-                className="bg-gradient-primary hover:opacity-90 text-white px-12 py-4 rounded-xl font-bold text-xl transition-all duration-300 transform hover:scale-105 shadow-xl"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-10 py-3 rounded-lg font-semibold text-lg transition-all duration-200 hover:shadow-lg border-0 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
               >
                 {predictMutation.isPending ? (
                   <div className="flex items-center gap-3">
@@ -264,7 +264,7 @@ export default function DemoSection() {
                     <div className="flex items-center space-x-4">
                       <div className="flex-1 bg-gray-200 rounded-full h-6">
                         <div 
-                          className="bg-gradient-healing h-6 rounded-full transition-all duration-500 flex items-center justify-end pr-2" 
+                          className="bg-green-500 h-6 rounded-full transition-all duration-500 flex items-center justify-end pr-2" 
                           style={{ width: `${result.confidence * 100}%` }}
                         >
                           <span className="text-white text-xs font-bold">

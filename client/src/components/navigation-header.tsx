@@ -62,7 +62,7 @@ export default function NavigationHeader() {
             >
               <Button 
                 asChild
-                className="ml-4 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                className="ml-4 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg shadow-md hover:shadow-lg transition-all duration-200"
               >
                 <a 
                   href="https://github.com" 
@@ -148,7 +148,7 @@ export default function NavigationHeader() {
               >
                 <Button 
                   asChild
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold rounded-xl"
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg"
                 >
                   <a 
                     href="https://github.com" 
