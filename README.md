@@ -8,10 +8,10 @@
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 
-**🏆 IndabaX South Sudan 2025 Hackathon Submission**  
+** IndabaX South Sudan 2025 Hackathon Submission**  
 **An advanced AI-powered web application for automated blood disease diagnosis and prediction**
 
-[🚀 Live Demo](https://your-deployment-url.com) • [Features](#features) • [Installation](#installation) • [API Docs](#api-documentation) • [AI Chatbot](./CHATBOT.md) • [Database](./DATABASE.md) • [Team](#team-codenomads)
+[ Live Demo](https://your-deployment-url.com) • [Features](#features) • [Installation](#installation) • [API Docs](#api-documentation) • [AI Chatbot](./CHATBOT.md) • [Database](./DATABASE.md) • [Team](#team-codenomads)
 
 </div>
 
@@ -36,15 +36,15 @@ Blood Disease Classification AI is a comprehensive full-stack web application th
 
 <div align="center">
 
-### 🏥 Dashboard Overview
+###  Dashboard Overview
 ![Dashboard](https://via.placeholder.com/800x400/1e293b/ffffff?text=Live+Health+Dashboard)
 *Real-time metrics and disease distribution analytics*
 
-### 🤖 AI-Powered Predictions
+###  AI-Powered Predictions
 ![Predictions](https://via.placeholder.com/800x400/dc2626/ffffff?text=Blood+Disease+Classification)
 *Instant blood disease classification with confidence scores*
 
-### 💬 AI Chatbot Interface
+###  AI Chatbot Interface
 ![Chatbot](https://via.placeholder.com/800x400/059669/ffffff?text=Medical+AI+Assistant)
 *Interactive medical consultation system*
 
@@ -267,8 +267,8 @@ IndabaX-South-Sudan-2025-AI-Hackathon/
 
 ## API Documentation
 
-> **🚀 Quick Start**: Run `npm run dev` and test the API endpoints below!  
-> **📚 Complete API Reference**: See [API.md](./API.md) for detailed documentation with all 24 endpoints
+> ** Quick Start**: Run `npm run dev` and test the API endpoints below!  
+> ** Complete API Reference**: See [API.md](./API.md) for detailed documentation with all 24 endpoints
 
 ### Base URL
 ```
@@ -276,11 +276,11 @@ http://localhost:5000/api
 ```
 
 🔗 **Quick API Test Links** (when running locally):
-- [📊 Live Metrics](http://localhost:5000/api/live-metrics)
-- [🩺 Recent Predictions](http://localhost:5000/api/recent-predictions)
-- [📈 Disease Distribution](http://localhost:5000/api/disease-distribution)
-- [📋 System Stats](http://localhost:5000/api/stats)
-- [❤️ Health Check](http://localhost:5000/api/health)
+- [ Live Metrics](http://localhost:5000/api/live-metrics)
+- [ Recent Predictions](http://localhost:5000/api/recent-predictions)
+- [ Disease Distribution](http://localhost:5000/api/disease-distribution)
+- [ System Stats](http://localhost:5000/api/stats)
+- [ Health Check](http://localhost:5000/api/health)
 
 ### Authentication
 No authentication required for this hackathon demo.
@@ -312,15 +312,15 @@ Error responses follow this format:
 #### Predictions
 - **`GET /live-metrics`** - Get real-time system metrics
   - **Response**: Live dashboard metrics including accuracy, total predictions, active cases
-  - **Test**: [📊 Try it now](http://localhost:5000/api/live-metrics)
+  - **Test**: [ Try it now](http://localhost:5000/api/live-metrics)
 
 - **`GET /recent-predictions`** - Fetch recent predictions
   - **Response**: Array of recent blood disease predictions
-  - **Test**: [🩺 Try it now](http://localhost:5000/api/recent-predictions)
+  - **Test**: [ Try it now](http://localhost:5000/api/recent-predictions)
 
 - **`GET /disease-distribution`** - Get disease classification data
   - **Response**: Distribution percentages of detected diseases
-  - **Test**: [📈 Try it now](http://localhost:5000/api/disease-distribution)
+  - **Test**: [ Try it now](http://localhost:5000/api/disease-distribution)
 
 - **`POST /predict`** - Submit new prediction request
   - **Body**: Blood parameters (glucose, hemoglobin, platelets, cholesterol, WBC, hematocrit)
@@ -356,11 +356,11 @@ Error responses follow this format:
 #### Statistics
 - **`GET /stats`** - System statistics and performance metrics
   - **Response**: Model performance, training stats, feature importance
-  - **Test**: [📋 Try it now](http://localhost:5000/api/stats)
+  - **Test**: [ Try it now](http://localhost:5000/api/stats)
 
 - **`GET /health`** - Server health check
   - **Response**: Server status and uptime information
-  - **Test**: [❤️ Try it now](http://localhost:5000/api/health)
+  - **Test**: [ Try it now](http://localhost:5000/api/health)
 
 #### WebSocket Endpoints
 - **`WS /live-updates`** - Real-time updates for dashboard metrics
@@ -370,7 +370,7 @@ Error responses follow this format:
 
 ---
 
-### 🧪 **API Testing Tools**
+###  **API Testing Tools**
 
 **For GET Requests:**
 - Click the direct links above when your server is running
@@ -400,7 +400,7 @@ curl -X POST http://localhost:5000/api/predict \
   -d '{"glucose":120,"hemoglobin":14.5,"platelets":250000,"cholesterol":180,"wbc":7000,"hematocrit":42}'
 ```
 
-> **📖 Need more details?** Check out the [Complete API Documentation](./API.md) for all 24 endpoints, detailed examples, and integration guides.
+> ** Need more details?** Check out the [Complete API Documentation](./API.md) for all 24 endpoints, detailed examples, and integration guides.
 
 ---
 
