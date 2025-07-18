@@ -8,10 +8,10 @@
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
 
-** IndabaX South Sudan 2025 Hackathon Submission**  
+**🏆 IndabaX South Sudan 2025 Hackathon Submission**  
 **An advanced AI-powered web application for automated blood disease diagnosis and prediction**
 
-[ Live Demo](https://your-deployment-url.com) • [Features](#features) • [Installation](#installation) • [API Docs](#api-documentation) • [AI Chatbot](./CHATBOT.md) • [Database](./DATABASE.md) • [Team](#team-codenomads)
+[🚀 Live Demo](https://your-deployment-url.com) • [Features](#features) • [Installation](#installation) • [API Docs](#api-documentation) • [AI Chatbot](./CHATBOT.md) • [Database](./DATABASE.md) • [Team](#team-codenomads)
 
 </div>
 
