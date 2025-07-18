@@ -1,11 +1,5 @@
 ---
 
-## Continuous Integration & Testing Status
-
-> **Note:**
-> The red "X" icons in the GitHub commit history indicate that automated CI checks or tests are not currently set up, or that no test script is present in the repository. This does not affect your code or deployment unless you require automated testing. To enable CI checks, add a test script to your `package.json` and configure a workflow in `.github/workflows/`.
-
-If you want to set up automated tests and CI, see [GitHub Actions Documentation](https://docs.github.com/en/actions) for details.
 # Blood Disease Classification AI
 
 <div align="center">
@@ -309,8 +303,8 @@ Error responses follow this format:
 ```json
 {
   "success": false,
-  "error": "Error message",
-  "code": "ERROR_CODE",
+  "error": "Invalid request. Please check your input parameters.",
+  "code": "INVALID_INPUT",
   "timestamp": "2025-01-18T10:30:00Z"
 }
 ```
