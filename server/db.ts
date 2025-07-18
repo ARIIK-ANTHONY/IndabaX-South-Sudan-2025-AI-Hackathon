@@ -12,8 +12,8 @@ if (process.env.NODE_ENV === 'production') {
     console.warn('DATABASE_URL environment variable is not defined in production. Using mock database for demo purposes.');
     db = { query: async () => ({}) };
   } else {
-    // Create a postgres-js client
-    const client = postgres(process.env.DATABASE_URL!);
+    // Create a postgres-js client with SSL required for cloud databases
+    const client = postgres(process.env.DATABASE_URL!, { ssl: 'require' });
     db = drizzle(client, { schema });
   }
 } else {
