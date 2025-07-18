@@ -1,11 +1,13 @@
 # Blood Disease Classification API Documentation
 
+> **🏠 Main Project**: See [README.md](./README.md) for project overview, setup instructions, and team information
+
 ## Overview
 This API provides endpoints for blood disease prediction, real-time analytics, and AI-powered medical consultation.
 
 **Base URL**: `http://localhost:5000/api`  
 **Version**: 1.0.0  
-**Accuracy**: 98.559%
+**Accuracy**: 98.7%
 
 ## Quick Start
 

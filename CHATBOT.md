@@ -1,5 +1,9 @@
 # IndabaX South Sudan 2025 AI Medical Chatbot
 
+> **🏠 Main Project**: See [README.md](./README.md) for project overview and setup instructions  
+> **🔧 API Reference**: See [API.md](./API.md) for complete API documentation  
+> **💾 Database**: See [DATABASE.md](./DATABASE.md) for database schema and setup  
+
 The AI Medical Chatbot is an intelligent assistant integrated into the Blood Disease Prediction System that can answer questions about blood diseases, medical conditions, treatments, and health-related topics. It's specifically designed to help users understand blood disease predictions and provide medical information.
 
 ## Features

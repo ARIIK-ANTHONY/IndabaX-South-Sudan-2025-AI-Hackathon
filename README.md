@@ -11,7 +11,7 @@
 **🏆 IndabaX South Sudan 2025 Hackathon Submission**  
 **An advanced AI-powered web application for automated blood disease diagnosis and prediction**
 
-[🚀 Live Demo](https://your-deployment-url.com) • [Features](#features) • [Installation](#installation) • [API Docs](#api-documentation) • [Team](#team-codenomads)
+[🚀 Live Demo](https://your-deployment-url.com) • [Features](#features) • [Installation](#installation) • [API Docs](#api-documentation) • [AI Chatbot](./CHATBOT.md) • [Database](./DATABASE.md) • [Team](#team-codenomads)
 
 </div>
 
@@ -267,10 +267,20 @@ IndabaX-South-Sudan-2025-AI-Hackathon/
 
 ## API Documentation
 
+> **🚀 Quick Start**: Run `npm run dev` and test the API endpoints below!  
+> **📚 Complete API Reference**: See [API.md](./API.md) for detailed documentation with all 24 endpoints
+
 ### Base URL
 ```
 http://localhost:5000/api
 ```
+
+🔗 **Quick API Test Links** (when running locally):
+- [📊 Live Metrics](http://localhost:5000/api/live-metrics)
+- [🩺 Recent Predictions](http://localhost:5000/api/recent-predictions)
+- [📈 Disease Distribution](http://localhost:5000/api/disease-distribution)
+- [📋 System Stats](http://localhost:5000/api/stats)
+- [❤️ Health Check](http://localhost:5000/api/health)
 
 ### Authentication
 No authentication required for this hackathon demo.
@@ -302,19 +312,20 @@ Error responses follow this format:
 #### Predictions
 - **`GET /live-metrics`** - Get real-time system metrics
   - **Response**: Live dashboard metrics including accuracy, total predictions, active cases
-  - **Example**: `GET /api/live-metrics`
+  - **Test**: [📊 Try it now](http://localhost:5000/api/live-metrics)
 
 - **`GET /recent-predictions`** - Fetch recent predictions
   - **Response**: Array of recent blood disease predictions
-  - **Example**: `GET /api/recent-predictions`
+  - **Test**: [🩺 Try it now](http://localhost:5000/api/recent-predictions)
 
 - **`GET /disease-distribution`** - Get disease classification data
   - **Response**: Distribution percentages of detected diseases
-  - **Example**: `GET /api/disease-distribution`
+  - **Test**: [📈 Try it now](http://localhost:5000/api/disease-distribution)
 
 - **`POST /predict`** - Submit new prediction request
   - **Body**: Blood parameters (glucose, hemoglobin, platelets, cholesterol, WBC, hematocrit)
   - **Response**: Disease prediction with confidence score
+  - **Test**: Use tools like [Postman](https://www.postman.com/) or curl
   - **Example**: 
     ```json
     {
@@ -330,31 +341,66 @@ Error responses follow this format:
 #### Chatbot
 - **`POST /chatbot/session`** - Create new chat session
   - **Response**: New session ID for chat context
-  - **Example**: `POST /api/chatbot/session`
+  - **Test**: Use POST request tools like [Postman](https://www.postman.com/)
 
 - **`POST /chatbot/message`** - Send message to chatbot
   - **Body**: `{ "sessionId": "string", "message": "string" }`
   - **Response**: AI-generated medical consultation response
-  - **Example**: `POST /api/chatbot/message`
+  - **Test**: Use POST request tools with JSON body
 
 - **`GET /chatbot/history`** - Get chat history
   - **Params**: `sessionId` (query parameter)
   - **Response**: Array of chat messages for the session
-  - **Example**: `GET /api/chatbot/history?sessionId=abc123`
+  - **Test**: `GET /api/chatbot/history?sessionId=your-session-id`
 
 #### Statistics
 - **`GET /stats`** - System statistics and performance metrics
   - **Response**: Model performance, training stats, feature importance
-  - **Example**: `GET /api/stats`
+  - **Test**: [📋 Try it now](http://localhost:5000/api/stats)
 
 - **`GET /health`** - Server health check
   - **Response**: Server status and uptime information
-  - **Example**: `GET /api/health`
+  - **Test**: [❤️ Try it now](http://localhost:5000/api/health)
 
 #### WebSocket Endpoints
 - **`WS /live-updates`** - Real-time updates for dashboard metrics
   - **Connection**: `ws://localhost:5000/live-updates`
   - **Events**: Live metrics, new predictions, system status
+  - **Test**: Use WebSocket testing tools like [WebSocket King](https://websocketking.com/)
+
+---
+
+### 🧪 **API Testing Tools**
+
+**For GET Requests:**
+- Click the direct links above when your server is running
+- Use browser developer tools
+- Try [Postman](https://www.postman.com/) for advanced testing
+
+**For POST Requests:**
+- [Postman](https://www.postman.com/) - Professional API testing
+- [Insomnia](https://insomnia.rest/) - Modern API client
+- [Thunder Client](https://www.thunderclient.com/) - VS Code extension
+
+**For WebSocket Testing:**
+- [WebSocket King](https://websocketking.com/) - Online WebSocket tester
+- [WebSocket.org Echo Test](https://www.websocket.org/echo.html) - Simple echo test
+
+**Sample cURL Commands:**
+```bash
+# Test live metrics
+curl http://localhost:5000/api/live-metrics
+
+# Test health check
+curl http://localhost:5000/api/health
+
+# Test prediction (POST)
+curl -X POST http://localhost:5000/api/predict \
+  -H "Content-Type: application/json" \
+  -d '{"glucose":120,"hemoglobin":14.5,"platelets":250000,"cholesterol":180,"wbc":7000,"hematocrit":42}'
+```
+
+> **📖 Need more details?** Check out the [Complete API Documentation](./API.md) for all 24 endpoints, detailed examples, and integration guides.
 
 ---
 
