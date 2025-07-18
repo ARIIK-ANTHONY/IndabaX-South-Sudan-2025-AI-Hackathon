@@ -175,7 +175,7 @@ export default function LiveDashboard() {
               <span className="text-sm font-medium text-gray-700">
                 {isConnected ? 'Connected' : 'Connecting...'}
               </span>
-              <Badge variant="outline" className="ml-2 bg-emerald-50 text-emerald-700 border-emerald-200">
+              <Badge variant="outline" className="ml-2 bg-green-50 text-green-700 border-green-400">
                 <Activity className="w-3 h-3 mr-1" />
                 Live
               </Badge>
@@ -201,8 +201,8 @@ export default function LiveDashboard() {
                     Live tracking
                   </p>
                 </div>
-                <div className="w-14 h-14 bg-gradient-sudan rounded-xl flex items-center justify-center shadow-lg">
-                  <Brain className="w-7 h-7 text-white" />
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center shadow-lg border-2 border-red-400 bg-red-50">
+                  <span className="text-2xl">🧠</span>
                 </div>
               </div>
             </CardContent>
@@ -219,8 +219,8 @@ export default function LiveDashboard() {
                     Above target
                   </p>
                 </div>
-                <div className="w-14 h-14 bg-medical-green rounded-xl flex items-center justify-center shadow-lg">
-                  <TrendingUp className="w-7 h-7 text-white" />
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center shadow-lg border-2 border-green-400 bg-green-50">
+                  <span className="text-2xl">📊</span>
                 </div>
               </div>
             </CardContent>
@@ -237,8 +237,8 @@ export default function LiveDashboard() {
                     High precision
                   </p>
                 </div>
-                <div className="w-14 h-14 bg-gradient-medical rounded-xl flex items-center justify-center shadow-lg">
-                  <Zap className="w-7 h-7 text-white" />
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center shadow-lg border-2 border-blue-400 bg-blue-50">
+                  <span className="text-2xl">⚡</span>
                 </div>
               </div>
             </CardContent>
@@ -255,8 +255,8 @@ export default function LiveDashboard() {
                     Real-time
                   </p>
                 </div>
-                <div className="w-14 h-14 bg-accent-purple rounded-xl flex items-center justify-center shadow-lg">
-                  <Users className="w-7 h-7 text-white" />
+                <div className="w-14 h-14 rounded-xl flex items-center justify-center shadow-lg border-2 border-blue-400 bg-blue-50">
+                  <span className="text-2xl">👥</span>
                 </div>
               </div>
             </CardContent>

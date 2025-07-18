@@ -26,11 +26,11 @@ export default function AboutSection() {
   ];
 
   return (
-    <section id="about" className="py-20 bg-gradient-to-br from-white via-emerald-50/30 to-white relative overflow-hidden">
+    <section id="about" className="py-20 bg-white border-t border-gray-200 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-40">
-        <div className="absolute top-20 left-20 w-32 h-32 bg-emerald-200/20 rounded-full blur-xl"></div>
-        <div className="absolute bottom-20 right-20 w-40 h-40 bg-teal-200/20 rounded-full blur-2xl"></div>
+        <div className="absolute top-20 left-20 w-32 h-32 bg-emerald-100 rounded-full blur-xl"></div>
+        <div className="absolute bottom-20 right-20 w-40 h-40 bg-blue-100 rounded-full blur-2xl"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -72,7 +72,7 @@ export default function AboutSection() {
               <Card className="border-2 border-emerald-100 hover:border-emerald-300 transition-all duration-300 bg-white/80 backdrop-blur-sm">
                 <CardContent className="p-8">
                   <div className="flex justify-center mb-4">
-                    <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center">
+                    <div className="w-16 h-16 bg-blue-600 rounded-full flex items-center justify-center shadow-md border-2 border-blue-100">
                       <stat.icon className="w-8 h-8 text-white" />
                     </div>
                   </div>
@@ -95,7 +95,7 @@ export default function AboutSection() {
             <Card className="h-full border-2 border-emerald-100 hover:border-emerald-300 transition-all duration-300 bg-white/80 backdrop-blur-sm">
               <CardContent className="p-8">
                 <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center mr-4">
+                  <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4 shadow-md border border-blue-100">
                     <Target className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900">Our Mission</h3>
@@ -118,7 +118,7 @@ export default function AboutSection() {
             <Card className="h-full border-2 border-emerald-100 hover:border-emerald-300 transition-all duration-300 bg-white/80 backdrop-blur-sm">
               <CardContent className="p-8">
                 <div className="flex items-center mb-6">
-                  <div className="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-lg flex items-center justify-center mr-4">
+                  <div className="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mr-4 shadow-md border border-blue-100">
                     <Globe className="w-6 h-6 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900">Our Vision</h3>
@@ -157,7 +157,7 @@ export default function AboutSection() {
                 <Card className="border-2 border-emerald-100 hover:border-emerald-300 transition-all duration-300 bg-white/80 backdrop-blur-sm h-full">
                   <CardContent className="p-8">
                     <div className="flex justify-center mb-6">
-                      <div className="w-16 h-16 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center">
+                      <div className="w-16 h-16 bg-slate-600 rounded-full flex items-center justify-center shadow-md border-2 border-slate-100">
                         <Award className="w-8 h-8 text-white" />
                       </div>
                     </div>

@@ -46,20 +46,21 @@ export default function HeroSection() {
   });
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50/50 text-gray-800 overflow-hidden">
-      {/* Subtle background pattern */}
-      <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-50/40 via-white to-gray-50/30"></div>
-        {/* Subtle geometric pattern */}
+    <section className="relative min-h-screen bg-gradient-to-br from-orange-50 to-red-50 border-b border-gray-200 text-gray-800 overflow-hidden">
+      {/* Warm, welcoming background with bold accents */}
+      <div className="absolute inset-0 opacity-40">
+        <div className="absolute inset-0 bg-gradient-to-br from-orange-50 to-red-50"></div>
+        {/* Bold geometric pattern */}
         <div className="absolute inset-0" 
              style={{
-               backgroundImage: `radial-gradient(circle at 1px 1px, rgba(156, 163, 175, 0.1) 1px, transparent 0)`,
+               backgroundImage: `radial-gradient(circle at 1px 1px, rgba(239, 68, 68, 0.1) 1px, transparent 0)`,
                backgroundSize: '40px 40px'
              }}>
         </div>
-        {/* Soft floating elements */}
-        <div className="absolute top-20 left-20 w-32 h-32 bg-gray-200/30 rounded-full blur-2xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-24 h-24 bg-gray-300/20 rounded-full blur-xl animate-pulse" style={{animationDelay: '3s'}}></div>
+        {/* Bold floating accent shapes */}
+        <div className="absolute top-20 left-20 w-32 h-32 bg-red-200 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-20 right-20 w-24 h-24 bg-orange-200 rounded-full blur-xl"></div>
+        <div className="absolute top-1/2 right-1/4 w-16 h-16 bg-red-300 rounded-full blur-lg"></div>
       </div>
       
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-32">
@@ -74,11 +75,11 @@ export default function HeroSection() {
             <Logo size="xl" variant="dark" animated={true} />
           </motion.div>
 
-          {/* Natural, approachable badge */}
+          {/* Bold, attention-grabbing badge */}
           <motion.div variants={itemVariants} className="mb-8">
-            <div className="inline-flex items-center px-6 py-3 rounded-full bg-gray-100 border border-gray-200 shadow">
-              <Sparkles className="w-5 h-5 mr-2 text-gray-600" />
-              <span className="text-sm font-medium text-gray-700">Trusted Medical AI Assistant</span>
+            <div className="inline-flex items-center px-6 py-3 rounded-full bg-orange-100 border-2 border-orange-400 shadow-lg">
+              <Sparkles className="w-5 h-5 mr-2 text-orange-600" />
+              <span className="text-sm font-bold text-orange-800">Revolutionary Medical AI</span>
             </div>
           </motion.div>
 
@@ -86,16 +87,16 @@ export default function HeroSection() {
             variants={itemVariants}
             className="text-5xl md:text-7xl font-bold mb-8 leading-tight text-gray-900"
           >
-            Compassionate Blood Disease Detection
+            <span className="text-red-700">Life-Saving</span> Blood Disease Detection
           </motion.h1>
           
           <motion.p 
             variants={itemVariants}
-            className="text-lg md:text-xl mb-16 text-gray-600 max-w-4xl mx-auto leading-relaxed"
+            className="text-lg md:text-xl mb-16 text-gray-800 max-w-4xl mx-auto leading-relaxed"
           >
             Empowering healthcare professionals with intelligent, accurate blood disease diagnosis. 
-            Our AI combines <span className="text-gray-800 font-semibold">cutting-edge technology</span> with 
-            <span className="text-teal-600 font-semibold"> human compassion</span> to deliver reliable results you can trust.
+            Our AI combines <span className="text-red-800 font-bold">cutting-edge technology</span> with 
+            <span className="text-orange-800 font-bold"> human compassion</span> to deliver reliable results you can trust.
           </motion.p>
           
           {/* Human-centered stats grid */}
@@ -115,12 +116,12 @@ export default function HeroSection() {
                 whileHover={{ scale: 1.03, y: -3 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <div className="relative bg-white rounded-2xl p-6 border border-gray-200 hover:border-gray-300 transition-all duration-300 shadow-lg hover:shadow-xl">
-                  <div className="inline-flex p-3 rounded-xl bg-gray-100 mb-4">
-                    <stat.icon className="w-6 h-6 text-gray-600" />
+                <div className="relative bg-white rounded-2xl p-6 border-2 border-red-400 hover:border-red-500 transition-all duration-300 shadow-lg hover:shadow-xl">
+                  <div className="inline-flex p-3 rounded-xl bg-red-50 mb-4">
+                    <stat.icon className="w-6 h-6 text-red-700" />
                   </div>
-                  <div className="text-3xl md:text-4xl font-bold text-gray-800 mb-2">{stat.value}</div>
-                  <div className="text-sm text-gray-600 font-medium">{stat.label}</div>
+                  <div className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">{stat.value}</div>
+                  <div className="text-sm text-red-700 font-bold">{stat.label}</div>
                 </div>
               </motion.div>
             ))}
@@ -138,7 +139,7 @@ export default function HeroSection() {
               <Button 
                 asChild
                 size="lg"
-                className="group bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl text-lg font-semibold shadow-lg transition-all duration-300 border-0"
+                className="group bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-xl text-lg font-bold shadow-xl transition-all duration-300 border-0"
               >
                 <a href="#demo" className="flex items-center">
                   <Play className="mr-3 w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -156,7 +157,7 @@ export default function HeroSection() {
                 variant="outline"
                 asChild
                 size="lg"
-                className="group border-2 border-emerald-300 text-emerald-700 px-8 py-4 rounded-xl text-lg font-semibold hover:bg-emerald-50 hover:border-emerald-400 backdrop-blur-sm transition-all duration-300"
+                className="group border-2 border-orange-600 text-orange-700 bg-orange-50 px-8 py-4 rounded-xl text-lg font-bold hover:bg-orange-100 hover:border-orange-700 transition-all duration-300"
               >
                 <a href="#live-dashboard" className="flex items-center">
                   <Activity className="mr-3 w-5 h-5 group-hover:scale-105 transition-transform" />

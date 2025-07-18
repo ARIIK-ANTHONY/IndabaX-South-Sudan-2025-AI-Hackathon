@@ -128,7 +128,7 @@ export default function DemoSection() {
   };
 
   return (
-    <section id="demo" className="py-24 bg-gradient-to-br from-wellness-mint/20 to-soft-teal/30">
+    <section id="demo" className="py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-20 slide-up">
           <h2 className="text-5xl font-bold text-gradient-primary mb-6">Interactive Prediction Demo</h2>

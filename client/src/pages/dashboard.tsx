@@ -14,10 +14,10 @@ import Footer from "@/components/footer";
 
 export default function Dashboard() {
   return (
-        <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50/50 relative overflow-hidden">
+        <div className="min-h-screen bg-gray-50 border-b border-gray-200 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute inset-0 bg-gradient-to-br from-gray-50/30 via-white to-gray-50/20"></div>
+        <div className="absolute inset-0 bg-white"></div>
         {/* Subtle dot pattern */}
         <div className="absolute inset-0" 
              style={{
