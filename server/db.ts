@@ -1,22 +1,21 @@
-import { drizzle } from 'drizzle-orm/neon-serverless';
-import { neon } from '@neondatabase/serverless';
+import { drizzle } from 'drizzle-orm/postgres-js';
+import postgres from 'postgres';
 import * as schema from '../shared/schema';
 
 // In development mode, we can use a mock DB client
-let sql: any;
+
 let db: any;
 
 if (process.env.NODE_ENV === 'production') {
   // Check if DATABASE_URL is defined in production
   if (!process.env.DATABASE_URL) {
-    throw new Error('DATABASE_URL environment variable is not defined in production');
+    console.warn('DATABASE_URL environment variable is not defined in production. Using mock database for demo purposes.');
+    db = { query: async () => ({}) };
+  } else {
+    // Create a postgres-js client
+    const client = postgres(process.env.DATABASE_URL!);
+    db = drizzle(client, { schema });
   }
-  
-  // Create a Neon client
-  sql = neon(process.env.DATABASE_URL);
-  
-  // Create a Drizzle ORM instance
-  db = drizzle(sql, { schema });
 } else {
   // In development, create a mock DB that doesn't actually connect
   // This allows the app to run without a real database connection
@@ -30,7 +29,6 @@ if (process.env.NODE_ENV === 'production') {
     };
   };
   
-  sql = mockSql;
   db = {
     select: () => ({
       from: () => ({
