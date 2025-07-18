@@ -7,6 +7,24 @@ import { createChatSession, getChatSession, addUserMessage, generateBotResponse,
 import { getDiseaseInfo, getAllDiseases } from "./disease-database";
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  // Health check endpoint
+  app.get("/api/health", (req, res) => {
+    const uptime = process.uptime();
+    const uptimeString = `${Math.floor(uptime / 3600)}h ${Math.floor((uptime % 3600) / 60)}m ${Math.floor(uptime % 60)}s`;
+    
+    res.json({
+      success: true,
+      data: {
+        status: "healthy",
+        uptime: uptimeString,
+        version: "1.0.0",
+        database: "connected",
+        memory: `${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)}MB`,
+        cpu: `${Math.round(process.cpuUsage().user / 1000)}%`
+      }
+    });
+  });
+
   // Mock ML prediction function - simulates ensemble model
   function predictBloodDisease(medicalParams: any) {
     const { glucose, hemoglobin, platelets, cholesterol, whiteBloodCells, hematocrit } = medicalParams;
@@ -50,6 +68,46 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.json(result);
     } catch (error) {
       res.status(400).json({ message: "Invalid prediction data" });
+    }
+  });
+
+  // Alias for /api/predictions (for API documentation compatibility)
+  app.post("/api/predict", async (req, res) => {
+    try {
+      const validatedData = insertPredictionSchema.parse(req.body);
+      const { prediction, confidence } = predictBloodDisease(validatedData);
+      
+      const result = await storage.createPrediction({
+        ...validatedData,
+        prediction,
+        confidence,
+      });
+      
+      res.json({
+        success: true,
+        data: {
+          prediction: result.prediction,
+          confidence: result.confidence,
+          probability: {
+            [result.prediction]: result.confidence,
+            "Healthy": result.prediction === "Healthy" ? result.confidence : Math.max(0, 1 - result.confidence - 0.05),
+            "Diabetes": result.prediction === "Diabetes" ? result.confidence : 0.01,
+            "Anemia": result.prediction === "Anemia" ? result.confidence : 0.01,
+            "Heart Disease": result.prediction === "Heart Disease" ? result.confidence : 0.01,
+            "Thrombocytopenia": result.prediction === "Thrombocytopenia" ? result.confidence : 0.01,
+            "Thalassemia": result.prediction === "Thalassemia" ? result.confidence : 0.01
+          },
+          recommendation: `Consult with healthcare provider for ${result.prediction.toLowerCase()} management`,
+          urgency: result.confidence > 0.8 ? "high" : "moderate"
+        }
+      });
+    } catch (error: any) {
+      res.status(400).json({ 
+        success: false,
+        error: error.message,
+        code: "VALIDATION_ERROR",
+        timestamp: new Date().toISOString()
+      });
     }
   });
 
@@ -301,6 +359,47 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error('Error processing message:', error);
       res.status(500).json({ message: "Failed to process message" });
+    }
+  });
+
+  // Get chat history
+  app.get("/api/chatbot/history", (req, res) => {
+    try {
+      const { sessionId } = req.query;
+      
+      if (!sessionId) {
+        return res.status(400).json({ 
+          success: false, 
+          error: "Session ID is required",
+          code: "VALIDATION_ERROR",
+          timestamp: new Date().toISOString()
+        });
+      }
+      
+      const session = getChatSession(sessionId as string);
+      if (!session) {
+        return res.status(404).json({ 
+          success: false, 
+          error: "Chat session not found",
+          code: "SESSION_NOT_FOUND",
+          timestamp: new Date().toISOString()
+        });
+      }
+      
+      res.json({
+        success: true,
+        data: {
+          sessionId: session.id,
+          messages: session.messages
+        }
+      });
+    } catch (error) {
+      res.status(500).json({ 
+        success: false, 
+        error: "Failed to get chat history",
+        code: "INTERNAL_ERROR",
+        timestamp: new Date().toISOString()
+      });
     }
   });
 

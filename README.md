@@ -268,22 +268,89 @@ IndabaX-South-Sudan-2025-AI-Hackathon/
 http://localhost:5000/api
 ```
 
+### Authentication
+No authentication required for this hackathon demo.
+
+### Response Format
+All API responses return JSON with the following structure:
+```json
+{
+  "success": true,
+  "data": { ... },
+  "message": "Optional message",
+  "timestamp": "2025-01-18T10:30:00Z"
+}
+```
+
+### Error Handling
+Error responses follow this format:
+```json
+{
+  "success": false,
+  "error": "Error message",
+  "code": "ERROR_CODE",
+  "timestamp": "2025-01-18T10:30:00Z"
+}
+```
+
 ### Endpoints
 
 #### Predictions
-- `GET /live-metrics` - Get real-time system metrics
-- `GET /recent-predictions` - Fetch recent predictions
-- `GET /disease-distribution` - Get disease classification data
-- `POST /predict` - Submit new prediction request
+- **`GET /live-metrics`** - Get real-time system metrics
+  - **Response**: Live dashboard metrics including accuracy, total predictions, active cases
+  - **Example**: `GET /api/live-metrics`
+
+- **`GET /recent-predictions`** - Fetch recent predictions
+  - **Response**: Array of recent blood disease predictions
+  - **Example**: `GET /api/recent-predictions`
+
+- **`GET /disease-distribution`** - Get disease classification data
+  - **Response**: Distribution percentages of detected diseases
+  - **Example**: `GET /api/disease-distribution`
+
+- **`POST /predict`** - Submit new prediction request
+  - **Body**: Blood parameters (glucose, hemoglobin, platelets, cholesterol, WBC, hematocrit)
+  - **Response**: Disease prediction with confidence score
+  - **Example**: 
+    ```json
+    {
+      "glucose": 120,
+      "hemoglobin": 14.5,
+      "platelets": 250000,
+      "cholesterol": 180,
+      "wbc": 7000,
+      "hematocrit": 42
+    }
+    ```
 
 #### Chatbot
-- `POST /chatbot/session` - Create new chat session
-- `POST /chatbot/message` - Send message to chatbot
-- `GET /chatbot/history` - Get chat history
+- **`POST /chatbot/session`** - Create new chat session
+  - **Response**: New session ID for chat context
+  - **Example**: `POST /api/chatbot/session`
+
+- **`POST /chatbot/message`** - Send message to chatbot
+  - **Body**: `{ "sessionId": "string", "message": "string" }`
+  - **Response**: AI-generated medical consultation response
+  - **Example**: `POST /api/chatbot/message`
+
+- **`GET /chatbot/history`** - Get chat history
+  - **Params**: `sessionId` (query parameter)
+  - **Response**: Array of chat messages for the session
+  - **Example**: `GET /api/chatbot/history?sessionId=abc123`
 
 #### Statistics
-- `GET /stats` - System statistics and performance metrics
-- `GET /health` - Server health check
+- **`GET /stats`** - System statistics and performance metrics
+  - **Response**: Model performance, training stats, feature importance
+  - **Example**: `GET /api/stats`
+
+- **`GET /health`** - Server health check
+  - **Response**: Server status and uptime information
+  - **Example**: `GET /api/health`
+
+#### WebSocket Endpoints
+- **`WS /live-updates`** - Real-time updates for dashboard metrics
+  - **Connection**: `ws://localhost:5000/live-updates`
+  - **Events**: Live metrics, new predictions, system status
 
 ---
 
@@ -436,7 +503,7 @@ For questions, suggestions, or collaboration opportunities:
 
 <div align="center">
 
-**Built with ❤️ by Team CodeNomads for IndabaX South Sudan 2025**
+**Built with passion by Team CodeNomads for IndabaX South Sudan 2025**
 
 ![Footer](https://img.shields.io/badge/Made%20with-TypeScript-blue?style=for-the-badge&logo=typescript)
 ![Footer](https://img.shields.io/badge/Built%20for-Healthcare-red?style=for-the-badge&logo=heart)

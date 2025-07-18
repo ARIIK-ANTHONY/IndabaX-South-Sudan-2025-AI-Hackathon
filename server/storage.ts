@@ -1,17 +1,51 @@
-import { users, predictions, liveMetrics, type User, type InsertUser, type Prediction, type InsertPrediction, type LiveMetrics, type InsertLiveMetrics } from "@shared/schema";
+import { 
+  users, predictions, liveMetrics, chatSessions, chatMessages, diseases, trainingData, systemLogs,
+  type User, type InsertUser, type Prediction, type InsertPrediction, type LiveMetrics, type InsertLiveMetrics,
+  type ChatSession, type InsertChatSession, type ChatMessage, type InsertChatMessage,
+  type Disease, type InsertDisease, type TrainingData, type InsertTrainingData,
+  type SystemLog, type InsertSystemLog
+} from "@shared/schema";
 import { db } from './db';
 import { eq, desc } from 'drizzle-orm';
 
 export interface IStorage {
+  // User operations
   getUser(id: number): Promise<User | undefined>;
   getUserByUsername(username: string): Promise<User | undefined>;
   createUser(user: InsertUser): Promise<User>;
+  
+  // Prediction operations
   createPrediction(prediction: InsertPrediction & { prediction: string; confidence: number }): Promise<Prediction>;
   getAllPredictions(): Promise<Prediction[]>;
   getRecentPredictions(limit?: number): Promise<Prediction[]>;
+  
+  // Live metrics operations
   getLiveMetrics(): Promise<LiveMetrics | undefined>;
   updateLiveMetrics(metrics: InsertLiveMetrics): Promise<LiveMetrics>;
   getDiseaseStats(): Promise<{ [key: string]: number }>;
+  
+  // Chat operations
+  createChatSession(session: InsertChatSession): Promise<ChatSession>;
+  getChatSession(sessionId: string): Promise<ChatSession | undefined>;
+  getChatMessages(sessionId: string): Promise<ChatMessage[]>;
+  createChatMessage(message: InsertChatMessage): Promise<ChatMessage>;
+  updateChatSessionActivity(sessionId: string): Promise<void>;
+  
+  // Disease operations
+  getAllDiseases(): Promise<Disease[]>;
+  getDiseaseByName(name: string): Promise<Disease | undefined>;
+  createDisease(disease: InsertDisease): Promise<Disease>;
+  updateDisease(id: number, disease: Partial<InsertDisease>): Promise<Disease>;
+  
+  // Training data operations
+  getAllTrainingData(): Promise<TrainingData[]>;
+  createTrainingData(data: InsertTrainingData): Promise<TrainingData>;
+  getTrainingDataByCategory(category: string): Promise<TrainingData[]>;
+  updateTrainingDataValidation(id: number, validated: boolean): Promise<TrainingData>;
+  
+  // System logs operations
+  createSystemLog(log: InsertSystemLog): Promise<SystemLog>;
+  getSystemLogs(level?: string, limit?: number): Promise<SystemLog[]>;
 }
 
 export class DbStorage implements IStorage {
@@ -63,6 +97,93 @@ export class DbStorage implements IStorage {
     
     return stats;
   }
+
+  // Chat operations
+  async createChatSession(sessionData: InsertChatSession): Promise<ChatSession> {
+    const result = await db.insert(chatSessions).values(sessionData).returning();
+    return result[0];
+  }
+
+  async getChatSession(sessionId: string): Promise<ChatSession | undefined> {
+    const result = await db.select().from(chatSessions).where(eq(chatSessions.sessionId, sessionId));
+    return result[0];
+  }
+
+  async getChatMessages(sessionId: string): Promise<ChatMessage[]> {
+    return await db.select().from(chatMessages).where(eq(chatMessages.sessionId, sessionId));
+  }
+
+  async createChatMessage(messageData: InsertChatMessage): Promise<ChatMessage> {
+    const result = await db.insert(chatMessages).values(messageData).returning();
+    return result[0];
+  }
+
+  async updateChatSessionActivity(sessionId: string): Promise<void> {
+    await db.update(chatSessions)
+      .set({ lastActivity: new Date() })
+      .where(eq(chatSessions.sessionId, sessionId));
+  }
+
+  // Disease operations
+  async getAllDiseases(): Promise<Disease[]> {
+    return await db.select().from(diseases);
+  }
+
+  async getDiseaseByName(name: string): Promise<Disease | undefined> {
+    const result = await db.select().from(diseases).where(eq(diseases.name, name));
+    return result[0];
+  }
+
+  async createDisease(diseaseData: InsertDisease): Promise<Disease> {
+    const result = await db.insert(diseases).values(diseaseData).returning();
+    return result[0];
+  }
+
+  async updateDisease(id: number, diseaseData: Partial<InsertDisease>): Promise<Disease> {
+    const result = await db.update(diseases)
+      .set({ ...diseaseData, updatedAt: new Date() })
+      .where(eq(diseases.id, id))
+      .returning();
+    return result[0];
+  }
+
+  // Training data operations
+  async getAllTrainingData(): Promise<TrainingData[]> {
+    return await db.select().from(trainingData);
+  }
+
+  async createTrainingData(data: InsertTrainingData): Promise<TrainingData> {
+    const result = await db.insert(trainingData).values(data).returning();
+    return result[0];
+  }
+
+  async getTrainingDataByCategory(category: string): Promise<TrainingData[]> {
+    return await db.select().from(trainingData).where(eq(trainingData.category, category));
+  }
+
+  async updateTrainingDataValidation(id: number, validated: boolean): Promise<TrainingData> {
+    const result = await db.update(trainingData)
+      .set({ validated })
+      .where(eq(trainingData.id, id))
+      .returning();
+    return result[0];
+  }
+
+  // System logs operations
+  async createSystemLog(logData: InsertSystemLog): Promise<SystemLog> {
+    const result = await db.insert(systemLogs).values(logData).returning();
+    return result[0];
+  }
+
+  async getSystemLogs(level?: string, limit: number = 100): Promise<SystemLog[]> {
+    let query = db.select().from(systemLogs).orderBy(desc(systemLogs.timestamp));
+    
+    if (level) {
+      query = query.where(eq(systemLogs.level, level));
+    }
+    
+    return await query.limit(limit);
+  }
 }
 
 // Create a memory storage implementation for development/testing
@@ -70,17 +191,37 @@ export class MemStorage implements IStorage {
   private users: Map<number, User>;
   private predictions: Map<number, Prediction>;
   private liveMetrics: LiveMetrics | null;
+  private chatSessions: Map<string, ChatSession>;
+  private chatMessages: Map<string, ChatMessage[]>;
+  private diseases: Map<number, Disease>;
+  private trainingData: Map<number, TrainingData>;
+  private systemLogs: SystemLog[];
   private currentUserId: number;
   private currentPredictionId: number;
   private currentMetricsId: number;
+  private currentChatSessionId: number;
+  private currentChatMessageId: number;
+  private currentDiseaseId: number;
+  private currentTrainingDataId: number;
+  private currentSystemLogId: number;
 
   constructor() {
     this.users = new Map();
     this.predictions = new Map();
+    this.chatSessions = new Map();
+    this.chatMessages = new Map();
+    this.diseases = new Map();
+    this.trainingData = new Map();
+    this.systemLogs = [];
     this.liveMetrics = null;
     this.currentUserId = 1;
     this.currentPredictionId = 1;
     this.currentMetricsId = 1;
+    this.currentChatSessionId = 1;
+    this.currentChatMessageId = 1;
+    this.currentDiseaseId = 1;
+    this.currentTrainingDataId = 1;
+    this.currentSystemLogId = 1;
     
     // Seed with some initial prediction data
     this.seedInitialData();
@@ -173,6 +314,159 @@ export class MemStorage implements IStorage {
     });
     
     return stats;
+  }
+
+  // Chat operations
+  async createChatSession(sessionData: InsertChatSession): Promise<ChatSession> {
+    const id = this.currentChatSessionId++;
+    const session: ChatSession = {
+      ...sessionData,
+      id,
+      userId: sessionData.userId || null,
+      createdAt: new Date(),
+      lastActivity: new Date(),
+    };
+    this.chatSessions.set(sessionData.sessionId, session);
+    this.chatMessages.set(sessionData.sessionId, []);
+    return session;
+  }
+
+  async getChatSession(sessionId: string): Promise<ChatSession | undefined> {
+    return this.chatSessions.get(sessionId);
+  }
+
+  async getChatMessages(sessionId: string): Promise<ChatMessage[]> {
+    return this.chatMessages.get(sessionId) || [];
+  }
+
+  async createChatMessage(messageData: InsertChatMessage): Promise<ChatMessage> {
+    const id = this.currentChatMessageId++;
+    const message: ChatMessage = {
+      ...messageData,
+      id,
+      timestamp: new Date(),
+    };
+    
+    const messages = this.chatMessages.get(messageData.sessionId) || [];
+    messages.push(message);
+    this.chatMessages.set(messageData.sessionId, messages);
+    
+    return message;
+  }
+
+  async updateChatSessionActivity(sessionId: string): Promise<void> {
+    const session = this.chatSessions.get(sessionId);
+    if (session) {
+      session.lastActivity = new Date();
+      this.chatSessions.set(sessionId, session);
+    }
+  }
+
+  // Disease operations
+  async getAllDiseases(): Promise<Disease[]> {
+    return Array.from(this.diseases.values());
+  }
+
+  async getDiseaseByName(name: string): Promise<Disease | undefined> {
+    return Array.from(this.diseases.values()).find(disease => disease.name === name);
+  }
+
+  async createDisease(diseaseData: InsertDisease): Promise<Disease> {
+    const id = this.currentDiseaseId++;
+    const disease: Disease = {
+      ...diseaseData,
+      id,
+      description: diseaseData.description || null,
+      symptoms: diseaseData.symptoms || null,
+      causes: diseaseData.causes || null,
+      treatments: diseaseData.treatments || null,
+      preventions: diseaseData.preventions || null,
+      riskFactors: diseaseData.riskFactors || null,
+      category: diseaseData.category || null,
+      severity: diseaseData.severity || null,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    };
+    this.diseases.set(id, disease);
+    return disease;
+  }
+
+  async updateDisease(id: number, diseaseData: Partial<InsertDisease>): Promise<Disease> {
+    const existingDisease = this.diseases.get(id);
+    if (!existingDisease) {
+      throw new Error(`Disease with id ${id} not found`);
+    }
+    
+    const updatedDisease: Disease = {
+      ...existingDisease,
+      ...diseaseData,
+      updatedAt: new Date(),
+    };
+    this.diseases.set(id, updatedDisease);
+    return updatedDisease;
+  }
+
+  // Training data operations
+  async getAllTrainingData(): Promise<TrainingData[]> {
+    return Array.from(this.trainingData.values());
+  }
+
+  async createTrainingData(data: InsertTrainingData): Promise<TrainingData> {
+    const id = this.currentTrainingDataId++;
+    const trainingDataItem: TrainingData = {
+      ...data,
+      id,
+      confidence: data.confidence || null,
+      category: data.category || null,
+      validated: data.validated || null,
+      createdAt: new Date(),
+    };
+    this.trainingData.set(id, trainingDataItem);
+    return trainingDataItem;
+  }
+
+  async getTrainingDataByCategory(category: string): Promise<TrainingData[]> {
+    return Array.from(this.trainingData.values()).filter(data => data.category === category);
+  }
+
+  async updateTrainingDataValidation(id: number, validated: boolean): Promise<TrainingData> {
+    const existingData = this.trainingData.get(id);
+    if (!existingData) {
+      throw new Error(`Training data with id ${id} not found`);
+    }
+    
+    const updatedData: TrainingData = {
+      ...existingData,
+      validated,
+    };
+    this.trainingData.set(id, updatedData);
+    return updatedData;
+  }
+
+  // System logs operations
+  async createSystemLog(logData: InsertSystemLog): Promise<SystemLog> {
+    const id = this.currentSystemLogId++;
+    const log: SystemLog = {
+      ...logData,
+      id,
+      context: logData.context || null,
+      timestamp: new Date(),
+    };
+    this.systemLogs.push(log);
+    return log;
+  }
+
+  async getSystemLogs(level?: string, limit: number = 100): Promise<SystemLog[]> {
+    let logs = [...this.systemLogs];
+    
+    if (level) {
+      logs = logs.filter(log => log.level === level);
+    }
+    
+    // Sort by timestamp descending
+    logs.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+    
+    return logs.slice(0, limit);
   }
 }
 

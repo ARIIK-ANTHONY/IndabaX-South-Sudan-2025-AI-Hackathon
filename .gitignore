@@ -10,3 +10,23 @@ vite.config.ts.*
 .env.test.local
 .env.production.local
 .replit
+
+# Additional security patterns
+*.log
+*.pid
+*.seed
+*.pid.lock
+.npm
+.nyc_output
+.cache
+.parcel-cache
+.next
+.nuxt
+.vuepress/dist
+.serverless
+.fusebox/
+.dynamodb/
+.tern-port
+coverage/
+*.tsbuildinfo
+.eslintcache
