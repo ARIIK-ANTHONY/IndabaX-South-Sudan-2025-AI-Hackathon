@@ -38,7 +38,7 @@ Blood Disease Classification AI is a comprehensive full-stack web application th
 
 
 <div align="center">
-
+  
 ### Dashboard Overview
 ![Dashboard Metrics](client/public/dashboard-metrics.png)
 *Real-time metrics and disease distribution analytics*
