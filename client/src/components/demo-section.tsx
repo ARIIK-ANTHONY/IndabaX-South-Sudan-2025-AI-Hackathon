@@ -54,14 +54,17 @@ export default function DemoSection() {
     },
     onSuccess: (data) => {
       console.log("Prediction successful:", data);
+      // Support both wrapped and direct response formats
+      const prediction = data?.data?.prediction ?? data.prediction;
+      const confidence = data?.data?.confidence ?? data.confidence;
       setResult({
-        prediction: data.prediction,
-        confidence: data.confidence,
+        prediction,
+        confidence,
       });
       queryClient.invalidateQueries({ queryKey: ["/api/predict"] });
       toast({
         title: "Prediction Complete",
-        description: `Predicted: ${data.prediction} (${(data.confidence * 100).toFixed(1)}% confidence)`,
+        description: `Predicted: ${prediction} (${typeof confidence === "number" ? (confidence * 100).toFixed(1) : "N/A"}% confidence)`,
       });
     },
     onError: (error: any) => {
