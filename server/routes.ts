@@ -149,29 +149,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Real-time data streaming endpoints
   app.get("/api/live-metrics", async (req, res) => {
     try {
-      const predictions = await storage.getAllPredictions();
+      // Only count predictions, do not load all into memory
+      const totalPredictions = await storage.getDiseaseStats().then(stats => Object.values(stats).reduce((a, b) => a + b, 0));
       const diseaseStats = await storage.getDiseaseStats();
-      
-      // Calculate live metrics
-      const totalPredictions = predictions.length;
-      const avgConfidence = predictions.length > 0 
-        ? predictions.reduce((sum, p) => sum + p.confidence, 0) / predictions.length 
-        : 0.85;
-      
-      // Calculate active cases (non-healthy predictions from recent data)
+      // Only load a limited number of predictions for metrics
       const recentPredictions = await storage.getRecentPredictions(100);
+      const avgConfidence = recentPredictions.length > 0
+        ? recentPredictions.reduce((sum, p) => sum + p.confidence, 0) / recentPredictions.length
+        : 0.85;
       const activeCases = recentPredictions.filter(p => p.prediction !== 'Healthy').length;
-      
       const liveData = {
         totalPredictions,
-        accuracyRate: 0.98559 + (Math.random() * 0.01 - 0.005), // Small variance around 98.559%
+        accuracyRate: 0.98559 + (Math.random() * 0.01 - 0.005),
         activeCases,
         diseaseStats,
-        avgConfidence: avgConfidence + (Math.random() * 0.02 - 0.01), // Small variance
+        avgConfidence: avgConfidence + (Math.random() * 0.02 - 0.01),
         recentPredictions: await storage.getRecentPredictions(10),
         timestamp: new Date()
       };
-
       res.json(liveData);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch live metrics" });
@@ -180,7 +175,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
   app.get("/api/recent-predictions", async (req, res) => {
     try {
-      const limit = parseInt(req.query.limit as string) || 10;
+      // Limit the number of predictions returned (default 10, max 100)
+      let limit = parseInt(req.query.limit as string) || 10;
+      if (limit > 100) limit = 100;
       const predictions = await storage.getRecentPredictions(limit);
       res.json(predictions);
     } catch (error) {
