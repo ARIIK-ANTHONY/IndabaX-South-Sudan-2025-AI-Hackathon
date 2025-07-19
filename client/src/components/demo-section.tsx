@@ -38,8 +38,17 @@ export default function DemoSection() {
   const predictMutation = useMutation({
     mutationFn: async (data: PredictionForm) => {
       console.log("Sending prediction data:", data);
-      const response = await apiRequest("POST", "/api/predictions", data);
-      const result = await response.json();
+      const response = await apiRequest("POST", "/api/predict", data);
+      let result;
+      try {
+        result = await response.json();
+      } catch (err) {
+        throw new Error("Invalid server response");
+      }
+      if (!response.ok) {
+        // Show backend error message if available
+        throw new Error(result?.error || result?.message || "Prediction failed");
+      }
       console.log("Prediction result:", result);
       return result;
     },
@@ -49,17 +58,17 @@ export default function DemoSection() {
         prediction: data.prediction,
         confidence: data.confidence,
       });
-      queryClient.invalidateQueries({ queryKey: ["/api/predictions"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/predict"] });
       toast({
         title: "Prediction Complete",
         description: `Predicted: ${data.prediction} (${(data.confidence * 100).toFixed(1)}% confidence)`,
       });
     },
-    onError: (error) => {
+    onError: (error: any) => {
       console.error("Prediction error:", error);
       toast({
         title: "Prediction Failed",
-        description: `Error: ${error.message || "Please check your input values and try again."}`,
+        description: error.message || "Please check your input values and try again.",
         variant: "destructive",
       });
     },
