@@ -3,6 +3,10 @@
 ## Team: CodeNomads
 **Member**: ARIIK ANTHONY MATHIANG
 
+Member: JONGKUCH CHOL ANYAR
+
+Member: JOK JOHN MAKER
+
 ### Achievement
 **Target Accuracy:** 0.98559+
 
@@ -25,7 +29,7 @@ This project delivers a robust machine learning solution for blood disease class
 
 ### Files
 - `Beginner- Starternotebook.ipynb`: Main solution notebook
-- `submission_championship.csv`: High-performance submission
+- `submission_xy.csv`: High-performance submission
 - `Blood_samples_dataset_balanced_2(f).csv`: Training data
 - `blood_samples_dataset_test.csv`: Test data
 
@@ -43,9 +47,7 @@ Medical domain logic is integrated throughout to ensure clinically relevant pred
 ### How to Use
 1. Open `Beginner- Starternotebook.ipynb` in Jupyter or VS Code.
 2. Run all cells to reproduce the results and generate predictions.
-3. Review `submission_championship.csv` for the final output.
+3. Review `submission_xy.csv` for the final output.
 
 ### Results & Impact
 Achieved a target accuracy of **0.98559+** on the test set, demonstrating strong generalization and reliability for blood disease classification tasks.
-
-**Competition Goal:** Achieve 0.98559+ accuracy
