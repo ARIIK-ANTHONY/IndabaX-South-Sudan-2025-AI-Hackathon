@@ -51,5 +51,3 @@ Medical domain logic is integrated throughout to ensure clinically relevant pred
 
 ### Results & Impact
 Achieved a target accuracy of **0.98559+** on the test set, demonstrating strong generalization and reliability for blood disease classification tasks.
-
-**Competition Goal:** Achieve 0.98559+ accuracy
