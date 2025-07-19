@@ -1,0 +1,395 @@
+openapi: 3.0.0
+info:
+  title: Blood Disease Classification API
+  description: AI-powered blood disease prediction and medical consultation API
+  version: 1.0.0
+  contact:
+    name: Team CodeNomads
+    url: https://github.com/ARIIK-ANTHONY/IndabaX-South-Sudan-2025-AI-Hackathon
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+
+servers:
+  - url: http://localhost:5000/api
+    description: Development server
+
+paths:
+  /health:
+    get:
+      summary: Health check endpoint
+      description: Check server status and uptime
+      responses:
+        '200':
+          description: Server is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      status:
+                        type: string
+                        example: "healthy"
+                      uptime:
+                        type: string
+                        example: "2h 45m 30s"
+                      version:
+                        type: string
+                        example: "1.0.0"
+
+  /predict:
+    post:
+      summary: Submit blood parameters for disease prediction
+      description: Analyze blood parameters and predict potential blood diseases
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - glucose
+                - hemoglobin
+                - platelets
+                - cholesterol
+                - wbc
+                - hematocrit
+              properties:
+                glucose:
+                  type: number
+                  description: Blood glucose level (mg/dL)
+                  example: 120
+                hemoglobin:
+                  type: number
+                  description: Hemoglobin level (g/dL)
+                  example: 14.5
+                platelets:
+                  type: number
+                  description: Platelet count (per μL)
+                  example: 250000
+                cholesterol:
+                  type: number
+                  description: Total cholesterol (mg/dL)
+                  example: 180
+                wbc:
+                  type: number
+                  description: White blood cell count (per μL)
+                  example: 7000
+                hematocrit:
+                  type: number
+                  description: Hematocrit percentage (%)
+                  example: 42
+      responses:
+        '200':
+          description: Prediction successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      prediction:
+                        type: string
+                        example: "Diabetes"
+                      confidence:
+                        type: number
+                        example: 0.92
+                      probability:
+                        type: object
+                        additionalProperties:
+                          type: number
+                      recommendation:
+                        type: string
+                        example: "Consult with healthcare provider"
+        '400':
+          description: Invalid input parameters
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /live-metrics:
+    get:
+      summary: Get real-time system metrics
+      description: Retrieve live dashboard metrics and system statistics
+      responses:
+        '200':
+          description: Live metrics retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      totalPredictions:
+                        type: integer
+                        example: 1247
+                      accuracyRate:
+                        type: number
+                        example: 0.98559
+                      activeCases:
+                        type: integer
+                        example: 156
+                      avgConfidence:
+                        type: number
+                        example: 0.942
+
+  /recent-predictions:
+    get:
+      summary: Get recent predictions
+      description: Fetch recent blood disease predictions with pagination
+      parameters:
+        - name: limit
+          in: query
+          description: Number of predictions to return
+          schema:
+            type: integer
+            default: 10
+        - name: offset
+          in: query
+          description: Pagination offset
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: Recent predictions retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        prediction:
+                          type: string
+                        confidence:
+                          type: number
+                        timestamp:
+                          type: string
+                          format: date-time
+
+  /disease-distribution:
+    get:
+      summary: Get disease distribution data
+      description: Retrieve distribution percentages of detected diseases
+      responses:
+        '200':
+          description: Disease distribution retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    additionalProperties:
+                      type: string
+                    example:
+                      "Diabetes": "32%"
+                      "Anemia": "24%"
+                      "Heart Disease": "18%"
+
+  /chatbot/session:
+    post:
+      summary: Create new chat session
+      description: Initialize a new chat session with the AI medical assistant
+      responses:
+        '200':
+          description: Chat session created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      sessionId:
+                        type: string
+                        example: "session_abc123"
+                      createdAt:
+                        type: string
+                        format: date-time
+                      expiresAt:
+                        type: string
+                        format: date-time
+
+  /chatbot/message:
+    post:
+      summary: Send message to chatbot
+      description: Send a message to the AI medical assistant
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - sessionId
+                - message
+              properties:
+                sessionId:
+                  type: string
+                  example: "session_abc123"
+                message:
+                  type: string
+                  example: "What are the symptoms of diabetes?"
+      responses:
+        '200':
+          description: Message sent successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      response:
+                        type: string
+                        example: "The symptoms you should watch for with diabetes include..."
+                      messageId:
+                        type: string
+                        example: "msg_456"
+                      timestamp:
+                        type: string
+                        format: date-time
+
+  /chatbot/history:
+    get:
+      summary: Get chat history
+      description: Retrieve chat history for a session
+      parameters:
+        - name: sessionId
+          in: query
+          required: true
+          description: Chat session ID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Chat history retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      sessionId:
+                        type: string
+                      messages:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            text:
+                              type: string
+                            sender:
+                              type: string
+                              enum: [user, bot]
+                            timestamp:
+                              type: string
+                              format: date-time
+
+  /stats:
+    get:
+      summary: Get system statistics
+      description: Retrieve system statistics and performance metrics
+      responses:
+        '200':
+          description: Statistics retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  success:
+                    type: boolean
+                    example: true
+                  data:
+                    type: object
+                    properties:
+                      modelAccuracy:
+                        type: number
+                        example: 98.559
+                      totalPredictions:
+                        type: integer
+                        example: 1247
+                      medicalFeatures:
+                        type: integer
+                        example: 24
+                      engineeredFeatures:
+                        type: integer
+                        example: 13
+                      diseaseClasses:
+                        type: integer
+                        example: 6
+
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: false
+        error:
+          type: string
+          example: "Detailed error message"
+        code:
+          type: string
+          example: "ERROR_CODE"
+        timestamp:
+          type: string
+          format: date-time
+
+tags:
+  - name: Health
+    description: Server health and status
+  - name: Predictions
+    description: Blood disease prediction endpoints
+  - name: Chatbot
+    description: AI medical consultation
+  - name: Statistics
+    description: System metrics and analytics
