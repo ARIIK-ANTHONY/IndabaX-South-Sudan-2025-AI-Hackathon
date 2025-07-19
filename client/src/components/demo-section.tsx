@@ -282,7 +282,9 @@ export default function DemoSection() {
                         </div>
                       </div>
                       <span className="text-2xl font-bold text-gray-900">
-                        {(result.confidence * 100).toFixed(1)}%
+                        {typeof result.confidence === "number" && !isNaN(result.confidence)
+                          ? `${(result.confidence * 100).toFixed(1)}%`
+                          : "N/A"}
                       </span>
                     </div>
                   </div>
