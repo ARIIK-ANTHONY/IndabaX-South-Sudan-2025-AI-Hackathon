@@ -3,6 +3,10 @@
 ## Team: CodeNomads
 **Member**: ARIIK ANTHONY MATHIANG
 
+Member: JONGKUCH CHOL ANYAR
+
+Member: JOK JOHN MAKER
+
 ### Achievement
 **Target Accuracy:** 0.98559+
 
