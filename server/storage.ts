@@ -7,6 +7,7 @@ import {
 } from "@shared/schema";
 import { db } from './db';
 import { eq, desc } from 'drizzle-orm';
+import { count } from 'drizzle-orm/sql';
 
 export interface IStorage {
   // User operations
@@ -94,7 +95,7 @@ export class DbStorage implements IStorage {
   async getDiseaseStats(): Promise<{ [key: string]: number }> {
     // Use aggregation to avoid loading all predictions
     const result: Array<{ prediction: string; count: number }> = await db
-      .select({ prediction: predictions.prediction, count: db.raw('COUNT(*)') })
+      .select({ prediction: predictions.prediction, count: count() })
       .from(predictions)
       .groupBy(predictions.prediction);
     const stats: { [key: string]: number } = {};

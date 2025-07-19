@@ -53,13 +53,53 @@ Develop an AI model to classify blood diseases based on medical laboratory test 
 
 ## Project Structure
 ```
-indabax-south-sudan-beginner/
-├── Beginner- Starternotebook.ipynb    # Main solution notebook
-├── Blood_samples_dataset_balanced_2(f).csv  # Training data (2,351 samples)
-├── blood_samples_dataset_test.csv    # Test data (486 samples)
-├── submission_xy.csv                 # Final predictions
-├── requirements.txt                  # Dependencies
-└── README.md                         # Project documentation
+IndabaX-South-Sudan-2025-AI-Hackathon/
+├── client/                      # Frontend React application
+│   ├── src/                     # Source code
+│   │   ├── components/          # Reusable UI components
+│   │   ├── pages/               # Application pages
+│   │   ├── hooks/               # Custom React hooks
+│   │   ├── lib/                 # Utility libraries
+│   │   └── main.tsx             # App entry point
+│   ├── public/                  # Static assets (images, etc.)
+│   └── index.html               # Main HTML file
+├── server/                      # Backend Node.js/Express API
+│   ├── index.ts                 # Server entry point
+│   ├── routes.ts                # API routes
+│   ├── db.ts                    # Database config
+│   ├── chatbot.ts               # AI chatbot logic
+│   ├── chatbot-data.ts          # Chatbot training data
+│   ├── chatbot-demo.ts          # Chatbot demo logic
+│   ├── chatbot-training.ts      # Chatbot training logic
+│   ├── knowledge-engine.ts      # Knowledge engine
+│   ├── disease-database.ts      # Disease info
+│   ├── setup-db.ts              # DB setup script
+│   ├── storage.ts               # Data persistence
+│   ├── swagger.ts               # API documentation
+│   └── vite.ts                  # Vite server config
+├── shared/                      # Shared types and schemas
+│   └── schema.ts                # Database schema
+├── migrations/                  # Database migrations (SQL)
+│   ├── 0001_add_complete_schema.sql
+│   └── 0002_seed_diseases.sql
+├── drizzle.config.ts            # Drizzle ORM config
+├── package.json                 # Project dependencies
+├── README.md                    # Project documentation
+├── API.md                       # API documentation
+├── DATABASE.md                  # Database documentation
+├── CHATBOT.md                   # Chatbot documentation
+├── tailwind.config.ts           # Tailwind CSS config
+├── tsconfig.json                # TypeScript config
+├── vite.config.ts               # Vite config
+├── postcss.config.js            # PostCSS config
+├── API-Tests.postman_collection.json # Postman API tests
+└── indabax-south-sudan-beginner/    # Starter notebook & datasets
+    ├── Beginner- Starternotebook.ipynb
+    ├── Blood_samples_dataset_balanced_2(f).csv
+    ├── blood_samples_dataset_test.csv
+    ├── submission_xy.csv
+    ├── requirements.txt
+    └── README_notbook.md
 ```
 
 ---
