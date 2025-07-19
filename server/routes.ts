@@ -74,15 +74,25 @@ export async function registerRoutes(app: Express): Promise<Server> {
   // Alias for /api/predictions (for API documentation compatibility)
   app.post("/api/predict", async (req, res) => {
     try {
+      // Strictly require all input fields
+      const requiredFields = ["glucose", "hemoglobin", "platelets", "cholesterol", "whiteBloodCells", "hematocrit"];
+      const missingFields = requiredFields.filter(f => req.body[f] === undefined || req.body[f] === null || req.body[f] === "");
+      const invalidFields = requiredFields.filter(f => typeof req.body[f] !== "number" || isNaN(req.body[f]));
+      if (missingFields.length > 0 || invalidFields.length > 0) {
+        return res.status(400).json({
+          success: false,
+          error: "VALIDATION_ERROR",
+          message: `Missing or invalid fields: ${[...missingFields, ...invalidFields].join(", ")}`,
+          timestamp: new Date().toISOString()
+        });
+      }
       const validatedData = insertPredictionSchema.parse(req.body);
       const { prediction, confidence } = predictBloodDisease(validatedData);
-      
       const result = await storage.createPrediction({
         ...validatedData,
         prediction,
         confidence,
       });
-      
       res.json({
         success: true,
         data: {
@@ -101,11 +111,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
           urgency: result.confidence > 0.8 ? "high" : "moderate"
         }
       });
-    } catch (error: any) {
-      res.status(400).json({ 
+    } catch (error) {
+      res.status(400).json({
         success: false,
-        error: error.message,
-        code: "VALIDATION_ERROR",
+        error: "VALIDATION_ERROR",
+        message: error.message || "Invalid prediction data",
         timestamp: new Date().toISOString()
       });
     }
