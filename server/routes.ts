@@ -112,10 +112,16 @@ export async function registerRoutes(app: Express): Promise<Server> {
         }
       });
     } catch (error) {
+      let errorMessage = "Invalid prediction data";
+      if (typeof error === "object" && error !== null && "message" in error) {
+        errorMessage = (error as any).message || errorMessage;
+      } else if (typeof error === "string") {
+        errorMessage = error;
+      }
       res.status(400).json({
         success: false,
         error: "VALIDATION_ERROR",
-        message: error.message || "Invalid prediction data",
+        message: errorMessage,
         timestamp: new Date().toISOString()
       });
     }
